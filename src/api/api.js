@@ -1,5 +1,5 @@
 import { rejectErrors, fetchJson } from './api-helpers'
-import { log } from '../lib/ke-utils'
+import { yellow } from 'logger'
 
 export default {
   members: {
@@ -15,6 +15,7 @@ export default {
       })
     },
     read() {
+      yellow('** read **')
       return fetchJson(
         '/members',
         { method: 'GET' }

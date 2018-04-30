@@ -7,6 +7,7 @@
 - redux
 - redux-logger
 - redux-thunk
+- redux-catch
 
 ## Packages __might__ add
 - ramda

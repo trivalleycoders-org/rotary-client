@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app/App';
-import { injectGlobal } from 'styled-components';
+import { Provider } from 'react-redux'
+import configureStore from './store'
 import registerServiceWorker from './registerServiceWorker';
+import { injectGlobal } from 'styled-components';
+import App from './app/App';
 // import Lato from './fonts/Lato/Lato-Regular.ttf'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={configureStore()}>
+    <App />
+  </Provider>,
+  document.getElementById('root'));
 registerServiceWorker();
 
 injectGlobal`

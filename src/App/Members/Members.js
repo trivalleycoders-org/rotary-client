@@ -8,6 +8,7 @@ import Section from 'elements/Section'
 import Table from 'elements/Table'
 import TR from 'elements/TR'
 import TH from 'elements/TH'
+import TD from 'elements/TD'
 import Member from './Member'
 import { log, yellow } from 'logger'
 
@@ -20,14 +21,27 @@ class Members extends Component {
   }
   render() {
     const { members, readMembersStatus } = this.props
-    yellow('readMembersStatus', readMembersStatus)
     if (readMembersStatus !== 'success') {
       return (<h1>Loading...</h1>)
     }
-
-    const rows = members.map((m) => {
-      return m
+    yellow('before: isArray(members)', Array.isArray(members))
+    const rows = members.map((m, index) => {
+      yellow('m', m)
+      return (
+        <Member
+          key={index}
+          comments={m.comments}
+          exempt={m.exempt}
+          avoidRoles={m.avoidRoles}
+          phone={m.phone}
+          _id={m._id}
+          firstName={m.firstName}
+          lastName={m.lastName}
+          email={m.email}
+        />
+      )
     })
+    yellow('after: isArray(rows)', Array.isArray(rows))
 
     return (
       <Section>
@@ -42,6 +56,10 @@ class Members extends Component {
             <TH>Phone</TH>
             <TH>Email</TH>
           </TR>
+          {/* <TR>
+            <TD>Hello</TD>
+          </TR> */}
+          {rows}
         </Table>
       </Section>
     )

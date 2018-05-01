@@ -1,22 +1,19 @@
 import { createRequestThunk, logReturnValue } from './action-helpers'
 import api from 'api'
+import { requestKeyReadMembers, actionAppReplaceMembers } from '../constants'
 import { yellow } from 'logger'
 
-export const replaceMembers = (members) => {
+export const actionReplaceMembers = (members) => {
   // ku.log('replaceMembers: members', members, 'orange')
 //   log('actions.replaceMembers', '', 'yellow')
   return({
-    type: 'app/replaceMembers',
+    type: actionAppReplaceMembers,
     payload: members,
   })
 }
 
-export const requestReadMembers = createRequestThunk({
+export const thunkRequestReadMembers = createRequestThunk({
   request: api.members.read,
-  key: 'api/getReadMembers',
-  success: [ replaceMembers,  (value) => logReturnValue(value)],
+  key: requestKeyReadMembers,
+  success: [ actionReplaceMembers ],
 })
-
-export const sayHi = () => {
-  return 'hello'
-}

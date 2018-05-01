@@ -1,4 +1,4 @@
-import { log } from 'logger'
+import { log, blue } from 'logger'
 
 export const logError = (err) => {
   log('actions.logError', err, 'red')
@@ -11,7 +11,7 @@ export const logReturnValue = (value) => {
 }
 
 const markRequestPending = (key) => {
-  log(`pending (${key})`, '', 'blue')
+  // log(`pending (${key})`, '', 'blue')
   return {
     type: 'app/markRequestPending',
     meta: { key },
@@ -19,7 +19,7 @@ const markRequestPending = (key) => {
 };
 
 const markRequestSuccess = (key) => {
-  log(`success (${key})`, '', 'blue')
+  // log(`success (${key})`, '', 'blue')
   return ({
     type: 'app/markRequestSuccess',
     meta: { key },
@@ -27,7 +27,7 @@ const markRequestSuccess = (key) => {
 }
 
 const markRequestFailed = (reason, key) => {
-  log(`failed (${key})`, '', 'blue')
+  // log(`failed (${key})`, '', 'blue')
   return {
     type: 'app/markRequestFailed',
     payload: reason,
@@ -37,21 +37,21 @@ const markRequestFailed = (reason, key) => {
 
 export const createRequestThunk = ({ request, key, start = [], success = [], failure = [] }) => {
   return (...args) => (dispatch) => {
-    const requestKey = (typeof key === 'function') ? key(...args) : key;
-
-    start.forEach((actionCreator) => dispatch(actionCreator()));
-    dispatch(markRequestPending(requestKey));
+    const requestKey = (typeof key === 'function') ? key(...args) : key
+    start.forEach((actionCreator) => {
+      dispatch(actionCreator())
+    })
+    dispatch(markRequestPending(requestKey))
     return request(...args)
       .then((data) => {
         success.forEach((actionCreator) => {
-          // log(`actionCreator.type=${actionCreator}`, '', 'red')
           dispatch(actionCreator(data))
         })
-        dispatch(markRequestSuccess(requestKey));
+        dispatch(markRequestSuccess(requestKey))
       })
       .catch((reason) => {
-        failure.forEach((actionCreator) => dispatch(actionCreator(reason)));
-        dispatch(markRequestFailed(reason, requestKey));
-      });
-  };
-};
+        failure.forEach((actionCreator) => dispatch(actionCreator(reason)))
+        dispatch(markRequestFailed(reason, requestKey))
+      })
+  }
+}

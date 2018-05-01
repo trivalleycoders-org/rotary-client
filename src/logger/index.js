@@ -55,14 +55,24 @@ const getStyle = (styleName) => {
   return color;
 }
 
-export const yellow = (message = '', value = '', color = '') => {
-
-
+const makeMessage = (message = '', value = '', color = '') => {
   const nMessage = `%c[${message}]`
-  const style = getStyle('yellow');
-
+  const style = getStyle(color)
   // eslint-disable-next-line no-console
-  console.log(nMessage, style, value);
+  console.log(nMessage, style, value)
+}
+
+export const yellow = (message = '', value = '') => {
+  makeMessage(message, value, 'yellow')
+}
+export const blue = (message = '', value = '') => {
+  makeMessage(message, value, 'blue')
+}
+export const red = (message = '', value = '') => {
+  makeMessage(message, value, 'red')
+}
+export const green = (message = '', value = '') => {
+  makeMessage(message, value, 'green')
 }
 
 export const log = (message = '', value = '', color = '') => {
@@ -83,4 +93,4 @@ export const log = (message = '', value = '', color = '') => {
   console.log(nMessage, style, value);
 }
 
-export default { log, yellow }
+export default { log, yellow, blue }

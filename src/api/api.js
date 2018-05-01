@@ -15,7 +15,7 @@ export default {
       })
     },
     read() {
-      yellow('** read **')
+      // yellow('** read **')
       return fetchJson(
         '/members',
         { method: 'GET' }

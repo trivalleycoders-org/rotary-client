@@ -31,7 +31,7 @@ export default {
           method: 'PUT',
           body: JSON.stringify({ member })
         }
-      );
+      )
     },
     delete(id) {
       return fetchJson(
@@ -43,7 +43,7 @@ export default {
       .then((data) => {
         // console.log(data)
         return data.affectedRows ? id : -1
-      });
+      })
     },
   },
 };

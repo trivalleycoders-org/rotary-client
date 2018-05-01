@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import configureStore from './store'
 import registerServiceWorker from './registerServiceWorker';
 import { injectGlobal } from 'styled-components';
-import App from './app/App';
+import App from './App';
 // import Lato from './fonts/Lato/Lato-Regular.ttf'
 
 ReactDOM.render(

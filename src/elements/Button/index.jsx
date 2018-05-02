@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import styles from './style.css'
 // import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { yellow } from 'logger'
 
 const ChildrenWrapper = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const ChildrenWrapper = styled.div`
 
 const ChildWrapper = styled.span`
   margin-left: ${props => props.index > 1 ? '10px' : 'inherit' };
-  font-size: ${props => typeof c === 'string' ? '1.3em' : '1em'}
+  font-size: ${props => typeof props.c === 'string' ? '1.3em' : '1em'}
 `
 const Button = styled.button`
   color: #fff;
@@ -78,6 +79,7 @@ const ButtonOld = (props) => {
   //   [styles.btnAmber]: props.amber,
   //   [styles.btnRed]: props.red,
   // })
+  yellow('children', props.children)
   const newChildren = props.children.map((c, index) => {
     // const childStyle = classNames({
     //   [styles.childMargin]: index > 0,
@@ -97,15 +99,6 @@ const ButtonOld = (props) => {
       <ChildrenWrapper>{newChildren}</ChildrenWrapper>
     </Button>
   )
-}
-
-Button.propTypes = {
-  default: PropTypes.bool,
-  green: PropTypes.bool,
-  blue: PropTypes.bool,
-  amber: PropTypes.bool,
-  red: PropTypes.bool,
-  children: PropTypes.array.isRequired,
 }
 
 export default Button

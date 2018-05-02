@@ -8,9 +8,11 @@ import Section from 'elements/Section'
 import Table from 'elements/Table'
 import TR from 'elements/TR'
 import TH from 'elements/TH'
-import TD from 'elements/TD'
+// import TD from 'elements/TD'
 import Member from './Member'
-import { log, yellow } from 'logger'
+import Button from 'elements/Button'
+import MemberAdd from 'elements/MemberAdd'
+import { yellow } from 'logger'
 
 class Members extends Component {
 
@@ -19,14 +21,18 @@ class Members extends Component {
     this.props.thunkRequestReadMembers()
 
   }
+
+  handleAddMemberClick = () => {
+
+  }
   render() {
     const { members, readMembersStatus } = this.props
     if (readMembersStatus !== 'success') {
       return (<h1>Loading...</h1>)
     }
-    yellow('before: isArray(members)', Array.isArray(members))
+    // yellow('before: isArray(members)', Array.isArray(members))
     const rows = members.map((m, index) => {
-      yellow('m', m)
+      // yellow('m', m)
       return (
         <Member
           key={index}
@@ -41,26 +47,32 @@ class Members extends Component {
         />
       )
     })
-    yellow('after: isArray(rows)', Array.isArray(rows))
+    // yellow('after: isArray(rows)', Array.isArray(rows))
 
     return (
       <Section>
         <h1>Members</h1>
-        <Table>
-          <TR>
-            <TH>First</TH>
-            <TH>Last</TH>
-            <TH>Exempt</TH>
-            <TH>Avoid</TH>
-            <TH>Comments</TH>
-            <TH>Phone</TH>
-            <TH>Email</TH>
-          </TR>
-          {/* <TR>
-            <TD>Hello</TD>
-          </TR> */}
-          {rows}
-        </Table>
+        <Section>
+          <Button onClick={this.handleAddMemberClick}>Add Member</Button>
+          <MemberAdd />
+        </Section>
+        <Section>
+          <Table>
+            <TR>
+              <TH>First</TH>
+              <TH>Last</TH>
+              <TH>Exempt</TH>
+              <TH>Avoid</TH>
+              <TH>Comments</TH>
+              <TH>Phone</TH>
+              <TH>Email</TH>
+            </TR>
+            {/* <TR>
+              <TD>Hello</TD>
+            </TR> */}
+            {rows}
+          </Table>
+        </Section>
       </Section>
     )
   }

@@ -11,7 +11,7 @@ import TH from 'elements/TH'
 // import TD from 'elements/TD'
 import Member from './Member'
 import Button from 'elements/Button'
-import MemberAdd from 'elements/MemberAdd'
+import MemberAdd from './MemberAdd'
 import { yellow } from 'logger'
 
 class Members extends Component {

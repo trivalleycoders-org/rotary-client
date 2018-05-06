@@ -6,6 +6,7 @@ import shortid from 'shortid'
 import Phone from './Phone'
 import { clone } from 'ramda'
 import { yellow } from 'logger'
+import H1 from 'elements/H1'
 
 const styles = theme => ({
   container: {
@@ -86,7 +87,7 @@ class MemberAdd extends Component {
 
     return (
       <div>
-        <h1>Add Member</h1>
+        <H1>Add Member</H1>
         <TextField type='text' name='firstName' placeholder='first name' onChange={(e) => this.handleInputChange(e)} />
         <TextField type='text' name='lastName' placeholder='last name' onChange={(e) => this.handleInputChange(e)} />
         <h2>Roles</h2>
@@ -105,5 +106,4 @@ class MemberAdd extends Component {
 MemberAdd.propTypes = {
   classes: PropTypes.object.isRequired,
 }
-export default (MemberAdd)
-// withStyles(styles)
+export default MemberAdd

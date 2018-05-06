@@ -7,19 +7,15 @@ import CssBaseline from 'material-ui/CssBaseline'
 // A theme with custom primary and secondary color.
 // It's optional.
 const theme = createMuiTheme({
+  // ...darkBaseTheme,
   palette: {
     type: 'dark',
-    // primary: {
-    //   light: purple[300],
-    //   main: purple[500],
-    //   dark: purple[700],
-    // },
-    // secondary: {
-    //   light: green[300],
-    //   main: green[500],
-    //   dark: green[700],
-    // },
   },
+  typography: {
+    display1: {
+      fontSize: '3rem',
+    }
+  }
 })
 
 function withRoot(Component) {

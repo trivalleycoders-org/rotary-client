@@ -14,13 +14,13 @@ ReactDOM.render(
   document.getElementById('root'));
 registerServiceWorker();
 
-injectGlobal`
-  body {
-    color: rgb(225, 225, 225);
-    background-color: #2f363d;
-    padding: 0 5%;
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    margin-bottom: 100px;
-  }
-`
+// injectGlobal`
+//   body {
+//     color: rgb(225, 225, 225);
+//     background-color: #2f363d;
+//     padding: 0 5%;
+//     margin: 0;
+//     font-family: 'Lato', sans-serif;
+//     margin-bottom: 100px;
+//   }
+// `

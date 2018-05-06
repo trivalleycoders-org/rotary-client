@@ -1,8 +1,23 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import TextField from 'material-ui/TextField'
 import shortid from 'shortid'
 import Phone from './Phone'
 import { clone } from 'ramda'
 import { yellow } from 'logger'
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+})
 
 class MemberAdd extends Component {
   constructor(props) {
@@ -21,6 +36,7 @@ class MemberAdd extends Component {
       email: '',
     }
   }
+
   handleTypeChange = (id, type) => {
     yellow(`id=${id}, type=${type}`)
     const { phones } = this.state
@@ -71,8 +87,8 @@ class MemberAdd extends Component {
     return (
       <div>
         <h1>Add Member</h1>
-        <input type='text' name='firstName' placeholder='first name' onChange={(e) => this.handleInputChange(e)} />
-        <input type='text' name='lastName' placeholder='last name' onChange={(e) => this.handleInputChange(e)} />
+        <TextField type='text' name='firstName' placeholder='first name' onChange={(e) => this.handleInputChange(e)} />
+        <TextField type='text' name='lastName' placeholder='last name' onChange={(e) => this.handleInputChange(e)} />
         <h2>Roles</h2>
         <label htmlFor='exempt'>Exempt </label><input name='exempt' type='checkbox'  checked={this.state.exempt} onChange={this.handleInputChange} />
         <h2>Comment</h2>
@@ -86,4 +102,8 @@ class MemberAdd extends Component {
     )
   }
 }
-export default MemberAdd
+MemberAdd.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+export default (MemberAdd)
+// withStyles(styles)

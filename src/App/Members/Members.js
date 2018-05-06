@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+// import compose from 'recompose/compose'
+// import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
+
 import * as memberActions from 'store/member-actions'
 import * as memberSelectors from 'store/member-selectors'
 import * as requestSelectors from 'store/request-selectors'
@@ -8,12 +12,10 @@ import Section from 'elements/Section'
 import Table from 'elements/Table'
 import TR from 'elements/TR'
 import TH from 'elements/TH'
-// import TD from 'elements/TD'
 import Member from './Member'
-import Button from 'elements/Button'
 import MemberAdd from './MemberAdd'
 import { yellow } from 'logger'
-
+import Typography from 'material-ui/Typography'
 class Members extends Component {
 
   componentDidMount() {
@@ -50,10 +52,19 @@ class Members extends Component {
     // yellow('after: isArray(rows)', Array.isArray(rows))
 
     return (
-      <Section>
-        <h1>Members</h1>
+      <Section title='Members' l4>
+        <Typography varient='display1'>
+          Hello from Members
+        </Typography>
+
         <Section>
-          <Button onClick={this.handleAddMemberClick}>Add Member</Button>
+          <Button
+            variant='raised'
+            color='primary'
+            onClick={this.handleAddMemberClick}
+            >
+              Add Member
+          </Button>
           <MemberAdd />
         </Section>
         <Section>
@@ -90,3 +101,8 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, memberActions)(Members)
+
+// export default compose(
+//   withStyles(styles, { name: 'Members' }),
+//   connect(mapStateToProps, memberActions)
+// )(Members)

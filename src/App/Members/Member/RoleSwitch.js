@@ -19,7 +19,7 @@ const styles = {
   checked: {},
 }
 
-class ExemptSwitch extends Component {
+class RoleSwitch extends Component {
   constructor(props) {
     super(props)
 
@@ -28,21 +28,27 @@ class ExemptSwitch extends Component {
     }
   }
 
-  handleCheckedChange = () => {
+  handleCheckedChange = (switchId) => {
+    blue('handle change', switchId)
+    let checked = null
     this.setState((prevState, props) => {
-      return {checked: !prevState.checked}
+      checked = !prevState.checked
+      return {checked: checked}
     })
+    // this.props.handleRoleChange({id: switchId, checked: checked})
   }
   render() {
-    const { switchName, checked, handleRoleChange, value, classes } = this.props
+    const { switchId, switchName, checked, handleRoleChange, value, classes } = this.props
     // blue('ExemptSwitch: switchName', switchName)
+    blue('render', switchId)
     return (
       <FormControlLabel
         label={switchName}
         control={
           <Switch
+            switchId={switchId}
             checked={this.state.checked}
-            onChange={this.handleCheckedChange}
+            onChange={this.handleCheckedChange(switchName)}
             value={value}
             classes={{
               switchBase: classes.switchBase,
@@ -55,4 +61,4 @@ class ExemptSwitch extends Component {
     )
   }
 }
-export default withStyles(styles)(ExemptSwitch)
+export default withStyles(styles)(RoleSwitch)

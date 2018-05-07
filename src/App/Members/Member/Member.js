@@ -3,22 +3,15 @@ import Table, {TableCell, TableRow} from 'material-ui/Table'
 import shortid from 'shortid'
 import Button from 'elements/Button'
 import RoleSwitch from './RoleSwitch'
-import MemberDialog from './MemberDialog'
+
 import { yellow } from 'logger'
 
 class Member extends Component {
-  state = {
-    open: false,
-  }
-
-  handleClick = (event, _id) => {
-    yellow('table row click', _id)
-    yellow('event', event.target)
-  }
 
   render() {
-    const { _id, firstName, lastName, comments, exempt, roles, phone,  email } = this.props
+    const { _id, firstName, lastName, comments, exempt, roles, phone,  email, handleOpenClick } = this.props
 
+    yellow('handleOpenClick', handleOpenClick)
     const renderPhone = phone.map((p) => {
       return (<div key={shortid.generate()}>{`${p.phoneType}: ${p.phoneNumber}`}</div>)
     })
@@ -26,9 +19,8 @@ class Member extends Component {
     const renderRoles = roles.map((r) => {
       return (<div key={shortid.generate()}>{`${r}`}</div>)
     })
-    yellow('_id', _id)
     return (
-      <TableRow onClick={event => this.handleClick(event, _id)}>
+      <TableRow onClick={e => handleOpenClick(e, _id)}>
         <TableCell>{firstName} {lastName}</TableCell>
         <TableCell>{renderPhone}</TableCell>
         <TableCell>{email}</TableCell>

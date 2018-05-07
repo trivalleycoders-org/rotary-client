@@ -5,10 +5,13 @@ class MemberDialog extends Component {
 
 
   render() {
+    const { ...other } = this.props
     return (
-      <Dialog>
+      <Dialog {...other}>
         <DialogTitle id='dt-test'>Dialog Title</DialogTitle>
       </Dialog>
     )
   }
 }
+
+export default MemberDialog

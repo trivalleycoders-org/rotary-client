@@ -17,8 +17,8 @@ const Section = ({ title, subTitle, l0, l1, l2, l3, l4, children }) => {
         return 'display4'
     }
   }
-  console.log('title', title)
-  console.log('display', display)
+  // console.log('title', title)
+  // console.log('display', display)
   return (
     <div>
       <Typography variant={display()} gutterBottom>

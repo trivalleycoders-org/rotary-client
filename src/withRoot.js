@@ -11,11 +11,11 @@ const theme = createMuiTheme({
   palette: {
     type: 'dark',
   },
-  typography: {
-    display1: {
-      fontSize: '3rem',
-    }
-  }
+  // typography: {
+  //   display1: {
+  //     fontSize: '3rem',
+  //   }
+  // }
 })
 
 function withRoot(Component) {

@@ -7,6 +7,9 @@ import Phone from './Phone'
 import { clone } from 'ramda'
 import { yellow } from 'logger'
 import H1 from 'elements/H1'
+import H2 from 'elements/H2'
+import { FormGroup, FormControlLabel } from 'material-ui/Form'
+import Switch from 'material-ui/Switch'
 
 const styles = theme => ({
   container: {
@@ -59,10 +62,12 @@ class MemberAdd extends Component {
     })
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = name => e => {
     const target = e.target
     const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
+
+    // const name = target.name
+    yellow('name', name)
     this.setState({
       [name]: value
     })
@@ -90,11 +95,22 @@ class MemberAdd extends Component {
         <H1>Add Member</H1>
         <TextField type='text' name='firstName' placeholder='first name' onChange={(e) => this.handleInputChange(e)} />
         <TextField type='text' name='lastName' placeholder='last name' onChange={(e) => this.handleInputChange(e)} />
-        <h2>Roles</h2>
-        <label htmlFor='exempt'>Exempt </label><input name='exempt' type='checkbox'  checked={this.state.exempt} onChange={this.handleInputChange} />
-        <h2>Comment</h2>
+        <H2>Roles</H2>
+        <FormControlLabel
+          label="Exempt"
+          control={
+            <Switch
+              checked={this.state.exempt}
+              onChange={this.handleInputChange('exempt')}
+              value="exempt"
+              color="secondary"
+            />
+          }
+          label="Exempt"
+        />
+        <H2>Comment</H2>
         <textarea rows='4' cols='50' name='comment' placeholder='comments' onChange={this.handleInputChange} /><br/>
-        <h2>Phone</h2>
+        <H2>Phone</H2>
         <button onClick={this.handleAddPhoneClick}>Add Phone</button>
         {this.renderPhones()}
 

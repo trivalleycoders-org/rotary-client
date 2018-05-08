@@ -1,19 +1,14 @@
-import React from 'react';
+import React from 'react'
 import Section from 'elements/Section'
 import Members from './Members'
-
+import withRoot from '../withRoot'
 
 const App = (props) => {
   return (
     <div>
-      <Section className={props.className}>
-        <h1>Hello</h1>
-      </Section>
-      <Section>
-        <Members />
-      </Section>
+      <Members />
     </div>
   )
 }
 
-export default App;
+export default withRoot(App)

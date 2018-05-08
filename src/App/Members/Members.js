@@ -1,62 +1,82 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import Button from 'material-ui/Button'
+import {connect} from 'react-redux'
+import Paper from 'material-ui/Paper'
+import Table, {TableBody, TableCell, TableHead, TableRow} from 'material-ui/Table'
+
 import * as memberActions from 'store/member-actions'
 import * as memberSelectors from 'store/member-selectors'
 import * as requestSelectors from 'store/request-selectors'
 import { requestKeyReadMembers } from '../../constants'
 import Section from 'elements/Section'
-import Table from 'elements/Table'
-import TR from 'elements/TR'
-import TH from 'elements/TH'
 import Member from './Member'
-import { log, yellow } from 'logger'
+// import MemberAdd from './MemberAdd'
+import MembersTable from './MembersTable'
+import MemberDialog from './MemberDialog'
+import {yellow} from 'logger'
 
 class Members extends Component {
+  state = {
+    open: false,
+  }
 
   componentDidMount() {
-    // yellow('componentDidMount')
     this.props.thunkRequestReadMembers()
 
   }
+
+  handleOpenClick = (e, id) => {
+    yellow('table row click', id)
+
+    this.setState({
+     open: true,
+    })
+  }
+
+  handleClose = value => {
+    this.setState({ selectedValue: value, open: false })
+  }
+
   render() {
-    const { members, readMembersStatus } = this.props
-    yellow('readMembersStatus', readMembersStatus)
+    const {members, readMembersStatus} = this.props
     if (readMembersStatus !== 'success') {
       return (<h1>Loading...</h1>)
     }
 
-    const rows = members.map((m) => {
-      return m
-    })
+
 
     return (
-      <Section>
-        <h1>Members</h1>
-        <Table>
-          <TR>
-            <TH>First</TH>
-            <TH>Last</TH>
-            <TH>Exempt</TH>
-            <TH>Avoid</TH>
-            <TH>Comments</TH>
-            <TH>Phone</TH>
-            <TH>Email</TH>
-          </TR>
-        </Table>
+      <Section title='Members' l1="l1">
+
+        {/* <Button variant='raised' color='primary' onClick={this.handleAddMemberClick}>
+          Add Member
+        </Button> */}
+        {/* <MemberAdd/> */}
+        <MembersTable
+          members={members}
+          handleOpenClick={this.handleOpenClick}
+        />
+        <MemberDialog
+         open={this.state.open}
+         handleClose={this.handleClose}
+        />
       </Section>
     )
   }
-
-
 }
 
 const mapStateToProps = (state) => {
 
   const o = {
     readMembersStatus: requestSelectors.getRequestStatus(state, requestKeyReadMembers),
-    members: memberSelectors.getMembers(state),
+    members: memberSelectors.getMembers(state)
   }
   return o
 }
 
 export default connect(mapStateToProps, memberActions)(Members)
+
+// export default compose(
+//   withStyles(styles, { name: 'Members' }),
+//   connect(mapStateToProps, memberActions)
+// )(Members)

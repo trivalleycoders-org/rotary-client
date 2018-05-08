@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 import { merge } from 'ramda'
+import { actionAppReplaceMembers } from '../constants'
 
 export const members = ( state = [], { type, payload }) => {
   switch (type) {
-    case 'app/replaceMembers':
+    case actionAppReplaceMembers:
       return payload.members
     default:
       return state

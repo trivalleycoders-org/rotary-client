@@ -93,4 +93,4 @@ export const log = (message = '', value = '', color = '') => {
   console.log(nMessage, style, value);
 }
 
-export default { log, yellow, blue }
+export default { log, yellow, blue, green }

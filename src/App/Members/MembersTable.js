@@ -3,7 +3,22 @@ import Table, {TableBody, TableCell, TableHead, TableRow} from 'material-ui/Tabl
 import Paper from 'material-ui/Paper'
 import Member from './Member'
 
-const MembersTable = () => {
+const MembersTable = ({ members, handleOpenClick }) => {
+  const rows = members.map(m => {
+    return (
+      <Member
+        _id={m._id}
+        firstName={m.firstName}
+        lastName={m.lastName}
+        comments={m.comments}
+        exempt={m.exempt}
+        roles={m.roles}
+        phone={m.phone}
+        email={m.email}
+        handleOpenClick={handleOpenClick}
+      />
+    )
+  })
   return (
     <Paper>
       <Table>

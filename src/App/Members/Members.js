@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Button from 'material-ui/Button'
 import {connect} from 'react-redux'
 import Paper from 'material-ui/Paper'
@@ -10,18 +10,32 @@ import * as requestSelectors from 'store/request-selectors'
 import { requestKeyReadMembers } from '../../constants'
 import Section from 'elements/Section'
 import Member from './Member'
-import MemberAdd from './MemberAdd'
-
+// import MemberAdd from './MemberAdd'
+import MembersTable from './MembersTable'
+import MemberDialog from './MemberDialog'
 import {yellow} from 'logger'
 
 class Members extends Component {
+  state = {
+    open: false,
+  }
 
   componentDidMount() {
     this.props.thunkRequestReadMembers()
 
   }
 
-  handleAddMemberClick = () => {}
+  handleOpenClick = (e, id) => {
+    yellow('table row click', id)
+
+    this.setState({
+     open: true,
+    })
+  }
+
+  handleClose = value => {
+    this.setState({ selectedValue: value, open: false })
+  }
 
   render() {
     const {members, readMembersStatus} = this.props
@@ -29,20 +43,7 @@ class Members extends Component {
       return (<h1>Loading...</h1>)
     }
 
-    const rows = members.map(m => {
-      return (
-        <Member
-          _id={m._id}
-          firstName={m.firstName}
-          lastName={m.lastName}
-          comments={m.comments}
-          exempt={m.exempt}
-          roles={m.roles}
-          phone={m.phone}
-          email={m.email}
-        />
-      )
-    })
+
 
     return (
       <Section title='Members' l1="l1">
@@ -51,20 +52,14 @@ class Members extends Component {
           Add Member
         </Button> */}
         {/* <MemberAdd/> */}
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Email</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows}
-            </TableBody>
-          </Table>
-        </Paper>
+        <MembersTable
+          members={members}
+          handleOpenClick={this.handleOpenClick}
+        />
+        <MemberDialog
+         open={this.state.open}
+         handleClose={this.handleClose}
+        />
       </Section>
     )
   }

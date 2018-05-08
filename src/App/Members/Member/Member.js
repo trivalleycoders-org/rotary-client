@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Table, {TableCell, TableRow} from 'material-ui/Table'
+import Button from 'material-ui/Button'
 import shortid from 'shortid'
-import Button from 'elements/Button'
 import RoleSwitch from './RoleSwitch'
 import MemberDialog from './MemberDialog'
 import { yellow } from 'logger'

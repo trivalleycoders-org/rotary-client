@@ -1,4 +1,4 @@
-import { yellow } from 'logger'
+// import { yellow } from 'logger'
 export const getRequest = (state, key) => {
   return state.requests[key] || {}
 }
@@ -10,6 +10,7 @@ export const getRequestStatus = (state, key) => {
 }
 
 export const getRequests = (state) => {
+
   return state.requests
 }
 

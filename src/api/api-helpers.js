@@ -1,4 +1,4 @@
-export const rejectErrors = (res) => {
+const rejectErrors = (res) => {
   const { status } = res
   if (status >= 200 && status < 300) {
     return res
@@ -20,4 +20,4 @@ export const fetchJson = (url, options = {}) => (
   .then((res) => res.json())
 )
 
-export default { rejectErrors, fetchJson }
+export default { fetchJson }

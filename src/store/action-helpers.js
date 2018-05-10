@@ -1,10 +1,10 @@
-import { log, blue } from 'logger'
+import { orange, red } from 'logger'
 
 export const logError = (err) => {
-  log('actions.logError', err, 'red')
+  red('actions.logError', err)
 }
 export const logReturnValue = (value) => {
-  log('actions.logReturnValue', value, 'green')
+  // orange('actions.logReturnValue', value)
   return ({
     type: 'app/noAction'
   })

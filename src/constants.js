@@ -1,2 +1,12 @@
-export const requestKeyReadMembers = 'requestKeyReadMembers'
-export const actionAppReplaceMembers = 'actionAppReplaceMembers'
+// Requests
+
+
+
+// Members
+
+
+
+
+// Forms
+export const actionAppSetFormOpen = 'actionAppSetFormOpen'
+export const memberDialog = 'memberDialog'

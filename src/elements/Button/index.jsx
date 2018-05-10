@@ -79,7 +79,7 @@ const ButtonOld = (props) => {
   //   [styles.btnAmber]: props.amber,
   //   [styles.btnRed]: props.red,
   // })
-  yellow('children', props.children)
+  // yellow('children', props.children)
   const newChildren = props.children.map((c, index) => {
     // const childStyle = classNames({
     //   [styles.childMargin]: index > 0,

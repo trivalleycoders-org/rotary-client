@@ -67,14 +67,14 @@ class MemberAdd extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value
 
     // const name = target.name
-    yellow('name', name)
+    // yellow('name', name)
     this.setState({
       [name]: value
     })
   }
 
   handleAddPhoneClick = () => {
-    yellow('addPhoneClick')
+    // yellow('addPhoneClick')
     const { phones } = this.state
     let newPhones = clone(phones)
     newPhones.push({ id: shortid.generate(), type: 'mobile', number: '' })

@@ -75,6 +75,10 @@ export const green = (message = '', value = '') => {
   makeMessage(message, value, 'green')
 }
 
+export const orange = (message = '', value = '') => {
+  makeMessage(message, value, 'orange')
+}
+
 export const log = (message = '', value = '', color = '') => {
   let count = 3
   if (color === '') { count-- }

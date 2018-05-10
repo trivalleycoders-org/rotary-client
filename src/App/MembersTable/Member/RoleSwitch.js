@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Switch from 'material-ui/Switch'
-import { FormGroup, FormControlLabel } from 'material-ui/Form'
+import { /*FormGroup,*/ FormControlLabel } from 'material-ui/Form'
 import green from 'material-ui/colors/green'
 import { withStyles } from 'material-ui/styles'
 import { blue } from 'logger'
@@ -38,7 +38,7 @@ class RoleSwitch extends Component {
     // this.props.handleRoleChange({id: switchId, checked: checked})
   }
   render() {
-    const { switchId, switchName, checked, handleRoleChange, value, classes } = this.props
+    const { switchId, switchName, /*handleRoleChange,*/ value, classes } = this.props
     // blue('ExemptSwitch: switchName', switchName)
     blue('render', switchId)
     return (

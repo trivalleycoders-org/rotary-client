@@ -5,7 +5,7 @@ import Typography from 'material-ui/Typography'
 
 const H4 = ({ children }) => {
   return (
-    <Typography variant='display4' gutterBottom>
+    <Typography variant='display1' gutterBottom>
       {children}
     </Typography>
   )

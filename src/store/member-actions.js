@@ -14,7 +14,6 @@ export const appUnsetMemberEditing = 'actionAppUnsetMemberEditing'
 export const appUpdateMemberEditing = 'actionAppUpdateMemberEditing'
 
 
-export const appMemberEditingId = 'actionAppMemberEditingId'
 
 
 export const appSetOpenMemberId = 'actionAppSetOpenMemberId'
@@ -26,7 +25,7 @@ export const appUnsetOpenMemberId = 'actionAppUnsetOpenMemberId'
 export const requestKeyReadMembers = 'requestKeyReadMembers'
 
 export const setOpenMemberId = (id) => {
-  orange('2) setOpenMemberId', id)
+  // orange('2) setOpenMemberId', id)
   return (
     {
       type: appSetOpenMemberId,
@@ -66,30 +65,31 @@ export const setMemberEditing = (member) => {
 }
 
 export const unsetMemberEditing = () => {
-  orange('unsetMemberEditing')
+  // orange('unsetMemberEditing')
   return ({
     type: appUnsetMemberEditing,
   })
 }
 
-export const updateMemberEditing = (field, value) => {
+export const updateMemberEditing = (field, value, _id) => {
   // orange('updateMemberEditing', `${field}: ${value}`)
   return ({
     type: appUpdateMemberEditing,
     payload: {
       field,
       value,
+      _id,
     }
   })
 }
 
 // above is newer
-export const actionMemberEditingId = (id) => {
-  return ({
-    type: appMemberEditingId,
-    payload: { id, }
-  })
-}
+// export const actionMemberEditingId = (id) => {
+//   return ({
+//     type: appMemberEditingId,
+//     payload: { id, }
+//   })
+// }
 
 export const actionMemberEditing = (props) => {
   // orange('actionMemberEditing: props', props)

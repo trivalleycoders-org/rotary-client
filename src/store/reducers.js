@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import { merge } from 'ramda'
+import { merge, clone } from 'ramda'
 import {
   /*appMemberEditing,*/
-  appMemberEditingId,
   appReplaceMembers,
   appSetOpenMemberId,
   appSetMemberEditing,
+  appUnsetMemberEditing,
   appUnsetOpenMemberId,
   appUpdateMemberEditing,
 } from 'store/member-actions'
@@ -13,8 +13,8 @@ import { blue, red } from 'logger'
 
 
 export const openMemberId = ( state = '', { type, payload }) => {
-  blue('3) appSetOpenMemberId: type', type)
-  blue('3) appSetOpenMemberId: payload', payload)
+  // blue('3) appSetOpenMemberId: type', type)
+  // blue('3) appSetOpenMemberId: payload', payload)
   try {
     switch (type) {
       case appSetOpenMemberId:
@@ -44,25 +44,33 @@ export const roles = ( state = [], { type, payload }) => {
   return state
 }
 
-export const memberEditingId = (state= '', { type, payload }) => {
-  switch (type) {
-    case appMemberEditingId:
-      return payload.id
-    default:
-      return state
-  }
-}
-
 export const memberEditing = (state = {}, { type, payload }) => {
-  // blue('memberEditing: state', state)
-  // blue('memberEditing: payload', payload)
+
   switch (type) {
     case appSetMemberEditing:
       return payload.member
-    case appUnsetOpenMemberId:
-      return {}
+    case appUnsetMemberEditing:
+      return {} // { firstName: '' }
     case appUpdateMemberEditing:
-      return merge(state, { [payload.field]: payload.value })
+      blue('memberEditing: state', state)
+      blue('memberEditing: payload', payload)
+      const field = payload.field
+      // blue('field', field)
+      const value = payload.value
+      const _id = payload._id
+      if (field === 'phoneNumber' || field === 'phoneType') {
+        const newState = clone(state)
+        newState.phone = state.phone.map(p => {
+          if (p._id === _id) {
+            return merge(p, {[payload.field]: payload.value})
+          }
+          return p
+        })
+        return newState
+      } else {
+        return merge(state, { [payload.field]: payload.value })
+      }
+
     default:
       return state
   }
@@ -87,7 +95,6 @@ export default combineReducers({
   requests,
   roles,
   openMemberId,
-  memberEditingId,
   memberEditing,
 
 })

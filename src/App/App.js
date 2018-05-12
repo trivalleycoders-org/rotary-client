@@ -8,6 +8,7 @@ import MemberDialog from './MemberDialog'
 // import Hello from './Hello'
 import { green } from 'logger'
 
+
 class App extends Component {
   state = {
     MemberDialog: false,
@@ -17,7 +18,7 @@ class App extends Component {
   }
 
   handleOpenClick = (e, _id, formName) => {
-    green('1) App.handleOpenClick: _id', _id)
+    // green('1) App.handleOpenClick: _id', _id)
     // green('props', this.props)
     // green('actionCreators', actions)
     // green('handleOpenClick: id', memberId);

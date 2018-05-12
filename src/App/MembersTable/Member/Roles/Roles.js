@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Role from './Role'
+import SubHeading from 'elements/SubHeading'
 import { green } from 'logger'
 
 const Roles = ({ handleUpdate, roles}) => {
@@ -18,6 +19,7 @@ const Roles = ({ handleUpdate, roles}) => {
 
   return (
     <div>
+      <SubHeading>Roles</SubHeading>
       {renderRoles}
     </div>
   )

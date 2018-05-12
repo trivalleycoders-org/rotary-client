@@ -14,10 +14,6 @@ import { compose } from 'recompose'
 import { green } from 'logger'
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
   textField: {
     // marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -29,9 +25,6 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 2,
     width: 416,
-  },
-  menu: {
-    width: 200,
   },
 })
 

@@ -17,14 +17,10 @@ import red from 'material-ui/colors/red'
 import Email from './Email'
 import Comments from './Comments'
 import grey from 'material-ui/colors/grey'
-import blue from 'material-ui/colors/blue'
 import { green } from 'logger'
 
 
 const styles = theme => ({
-  cssRoot: {
-    color: blue,
-  },
   content: {
     paddingTop: '10px',
   },
@@ -52,16 +48,22 @@ const styles = theme => ({
 class MemberDialog extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // green('this.props.open', this.props.open)
-    green('memberEditing', this.props.memberEditing)
+    // green('memberEditing', this.props.memberEditing)
     if (this.props.open && isEmpty(this.props.memberEditing)) {
       this.props.setMemberEditing(this.props.member)
     }
   }
 
-  handleUpdate = (e, _id) => {
+  handleUpdate = (e, _id, controlType) => {
     // if the item is a sub-document with _id, it will be passed
+
     const field = e.target.name
-    const value = e.target.value
+    let value
+    if (controlType === 'switch') {
+      value = e.target.checked
+    } else {
+      value = e.target.value
+    }
     this.props.updateMemberEditing(field, value, _id)
   }
 
@@ -106,8 +108,16 @@ class MemberDialog extends Component {
 
         </DialogContent>
         <DialogActions>
-          <Button className={classes.cssRoot} onClick={() => handleClose('MemberDialog')}>Cancel</Button>
-          <Button onClick={() => handleClose('MemberDialog')}>Save</Button>
+          <Button
+            color='primary'
+            onClick={() => handleClose('MemberDialog')}>
+            Cancel
+          </Button>
+          <Button
+            color='primary'
+            onClick={() => handleClose('MemberDialog')}>
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     )

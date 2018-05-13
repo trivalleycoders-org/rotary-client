@@ -28,27 +28,28 @@ class RoleSwitch extends Component {
     }
   }
 
-  handleCheckedChange = (e, _id) => {
+  handleCheckedChange = (e, _id, controlType) => {
     blue('handle change', _id)
-    let checked = null
+    blue('e.target.checked', e.target.checked)
+    let checked = e.target.checked
     this.setState((prevState, props) => {
-      checked = !prevState.checked
       return {checked: checked}
     })
-    this.props.handleUpdate(e, _id)
+    this.props.handleUpdate(e, _id, controlType)
     // this.props.handleRoleChange({id: switchId, checked: checked})
   }
   render() {
     const { _id, hanedleUpdate, name, /*handleRoleChange,*/ avoid, classes } = this.props
     // blue('ExemptSwitch: switchName', switchName)
-    blue('render', _id)
     return (
       <FormControlLabel
         label={name}
+        name={`roles|${name.toLowerCase()}`}
         control={
           <Switch
             checked={this.state.checked}
-            onChange={(e) => this.handleCheckedChange(e, _id)}
+            name={`roles|${name.toLowerCase()}`}
+            onChange={(e) => this.handleCheckedChange(e, _id, 'switch')}
             //value={avoid}
             classes={{
               switchBase: classes.switchBase,

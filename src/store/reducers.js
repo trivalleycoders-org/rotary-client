@@ -52,13 +52,23 @@ export const memberEditing = (state = {}, { type, payload }) => {
     case appUnsetMemberEditing:
       return {} // { firstName: '' }
     case appUpdateMemberEditing:
+      // field are sometimes sent in as '|' delimited strings
+      // e.g., 'roles|photographer'
       blue('memberEditing: state', state)
       blue('memberEditing: payload', payload)
-      const field = payload.field
-      // blue('field', field)
-      const value = payload.value
+      const field = payload.field.split('|')[0]
       const _id = payload._id
-      if (field === 'phoneNumber' || field === 'phoneType') {
+      if (field === 'roles') {
+        const newState = clone(state)
+        newState.roles = state.roles.map(p => {
+          if (p._id === _id) {
+            // return merge(p, {[payload.field]: payload.value})
+            return merge(p, {'avoid': payload.value})
+          }
+          return p
+        })
+        return newState
+      } else if (field === 'phoneNumber' || field === 'phoneType') {
         const newState = clone(state)
         newState.phone = state.phone.map(p => {
           if (p._id === _id) {

@@ -56,23 +56,28 @@ export const memberEditing = (state = {}, { type, payload }) => {
       // e.g., 'roles|photographer'
       blue('memberEditing: state', state)
       blue('memberEditing: payload', payload)
-      const field = payload.field.split('|')[0]
+      const fields = payload.field.split('|')
+      // for now, there will only be field & subField, no
+      // further levels
+      const field = fields[0]
+      const subField = fields.length === 2 ? fields[1] : null
       const _id = payload._id
+      blue('field', field)
+      blue('subField', subField)
       if (field === 'roles') {
         const newState = clone(state)
         newState.roles = state.roles.map(p => {
           if (p._id === _id) {
-            // return merge(p, {[payload.field]: payload.value})
-            return merge(p, {'avoid': payload.value})
+            return merge(p, {[subField]: payload.value})
           }
           return p
         })
         return newState
-      } else if (field === 'phoneNumber' || field === 'phoneType') {
+      } else if (field === 'phone') {
         const newState = clone(state)
         newState.phone = state.phone.map(p => {
           if (p._id === _id) {
-            return merge(p, {[payload.field]: payload.value})
+            return merge(p, {[subField]: payload.value})
           }
           return p
         })

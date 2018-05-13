@@ -26,14 +26,14 @@ const Phone = ({ classes, _id, handleUpdate, phoneNumber, phoneType }) => {
       <TextField
         className={classes.textField}
         label='Phone'
-        name='phoneType'
+        name='phone|phoneType'
         onChange={(e) => handleUpdate(e, _id)}
         type='text'
         value={phoneType}
       />
       <TextField
         label='Phone'
-        name='phoneNumber'
+        name='phone|phoneNumber'
         onChange={(e) => handleUpdate(e, _id)}
         type='text'
         value={phoneNumber}

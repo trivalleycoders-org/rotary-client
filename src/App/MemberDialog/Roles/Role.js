@@ -48,7 +48,7 @@ class RoleSwitch extends Component {
         control={
           <Switch
             checked={this.state.checked}
-            name={`roles|${name.toLowerCase()}`}
+            name='roles|avoid'
             onChange={(e) => this.handleCheckedChange(e, _id, 'switch')}
             //value={avoid}
             classes={{

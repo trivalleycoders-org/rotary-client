@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as memberActions from 'store/member-actions'
 import * as requestSelectors from 'store/request-selectors'
-// import { requestKeyReadMembers } from '../constants'
 import MembersTable from './MembersTable'
 import MemberDialog from './MemberDialog'
-// import Hello from './Hello'
+import AppBar from 'elements/AppBar'
 import { green } from 'logger'
 
 
@@ -18,10 +17,6 @@ class App extends Component {
   }
 
   handleOpenClick = (e, _id, formName) => {
-    // green('1) App.handleOpenClick: _id', _id)
-    // green('props', this.props)
-    // green('actionCreators', actions)
-    // green('handleOpenClick: id', memberId);
     this.props.setOpenMemberId(_id)
     this.setState({
       [formName]: true
@@ -43,6 +38,7 @@ class App extends Component {
     }
     return (
       <div>
+        <AppBar title='Rotary Club' />
         <MembersTable handleOpenClick={this.handleOpenClick} />
         <MemberDialog
           open={this.state.MemberDialog}

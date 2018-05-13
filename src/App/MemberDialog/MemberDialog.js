@@ -6,25 +6,38 @@ import Dialog, { DialogTitle, DialogContent, DialogContentText, DialogActions } 
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import { isEmpty } from 'ramda'
-import Phones from './MembersTable/Member/Phones'
-import Roles from './MembersTable/Member/Roles'
+import Phones from './Phones'
+import Roles from './Roles'
+import Name from './Name'
 import Caption from 'elements/Caption'
 import { withStyles } from 'material-ui/styles'
 import { compose } from 'recompose'
+import Icon from 'material-ui/Icon'
+import red from 'material-ui/colors/red'
 import { green } from 'logger'
 
+
 const styles = theme => ({
-  textField: {
-    // marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit * 2,
-    width: 200,
-  },
   emailField: {
     // marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 2,
     width: 416,
+  },
+  icon: {
+    margin: theme.spacing.unit * 2,
+  },
+  iconHover: {
+    margin: theme.spacing.unit * 2,
+    '&:hover': {
+      color: red[800],
+    },
+  },
+  textField: {
+    // marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    marginBottom: theme.spacing.unit * 2,
+    width: 200,
   },
 })
 
@@ -59,27 +72,14 @@ class MemberDialog extends Component {
         <DialogTitle id='dt-edit-member'>
           Edit Member
           <Caption>ID: {openMemberId}</Caption>
+          <Icon className={classes.icon} color="primary">
+            edit
+          </Icon>
         </DialogTitle>
         <DialogContent>
-
-          <DialogContentText>
-
-          </DialogContentText>
-          <TextField
-            className={classes.textField}
-            label='First Name'
-            name='firstName'
-            onChange={(e) => this.handleUpdate(e)}
-            type='text'
-            value={memberEditing.firstName}
-          />
-          <TextField
-            className={classes.textField}
-            label='Last  Name'
-            name='lastName'
-            onChange={(e) => this.handleUpdate(e)}
-            type='text'
-            value={memberEditing.lastName}
+          <Name
+            handleUpdate={this.handleUpdate}
+            memberEditing={memberEditing}
           />
           <TextField
             className={classes.emailField}

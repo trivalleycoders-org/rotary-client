@@ -29,11 +29,13 @@ const Roles = ({ classes, handleUpdate, roles}) => {
   })
 
   return (
-    <Paper className={classes.root}>
+    // <Paper className={classes.root}>
+    <div className={classes.root}>
       <SubHeading>Roles</SubHeading>
       <Caption>On means member is willing to perform the role</Caption>
       {renderRoles}
-    </Paper>
+    </div>
+    // </Paper>
   )
 }
 

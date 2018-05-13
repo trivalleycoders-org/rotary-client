@@ -5,9 +5,9 @@ import deepOrange from 'material-ui/colors/deepOrange'
 import deepPurple from 'material-ui/colors/deepPurple'
 
 const styles = theme => ({
-  avatar: {
-   margin: 10,
-  },
+  // avatar: {
+  //  margin: 10,
+  // },
   orangeAvatar: {
    margin: 10,
    color: '#fff',
@@ -23,7 +23,7 @@ const styles = theme => ({
 
 const AvatarWrapped = ({ classes, children }) => {
   return (
-    <Avatar className={classes.avatar}>{children}</Avatar>
+    <Avatar className={classes.orangeAvatar}>{children}</Avatar>
   )
 }
 

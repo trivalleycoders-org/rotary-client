@@ -14,15 +14,23 @@ import { withStyles } from 'material-ui/styles'
 import { compose } from 'recompose'
 import Icon from 'material-ui/Icon'
 import red from 'material-ui/colors/red'
+import Email from './Email'
+import Comments from './Comments'
+import grey from 'material-ui/colors/grey'
+import blue from 'material-ui/colors/blue'
 import { green } from 'logger'
 
 
 const styles = theme => ({
-  emailField: {
-    // marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    marginBottom: theme.spacing.unit * 2,
-    width: 416,
+  cssRoot: {
+    color: blue,
+  },
+  content: {
+    paddingTop: '10px',
+  },
+  title: {
+    backgroundColor: grey[700],
+    padding: '25px',
   },
   icon: {
     margin: theme.spacing.unit * 2,
@@ -69,39 +77,37 @@ class MemberDialog extends Component {
 
     return (
       <Dialog open={open}>
-        <DialogTitle id='dt-edit-member'>
+        <DialogTitle className={classes.title} id='dt-edit-member'>
           Edit Member
           <Caption>ID: {openMemberId}</Caption>
-          <Icon className={classes.icon} color="primary">
-            edit
-          </Icon>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent className={classes.content}>
           <Name
             handleUpdate={this.handleUpdate}
             memberEditing={memberEditing}
           />
-          <TextField
-            className={classes.emailField}
-            label='Email'
-            name='email'
-            onChange={(e) => this.handleUpdate(e)}
-            type='text'
-            value={memberEditing.email}
+
+          <Email
+            handleUpdate={this.handleUpdate}
+            memberEditing={memberEditing}
           />
           <Phones
-            phones={memberEditing.phone}
             handleUpdate={this.handleUpdate}
+            phones={memberEditing.phone}
           />
           <Roles
-            roles={memberEditing.roles}
             handleUpdate={this.handleUpdate}
+            roles={memberEditing.roles}
           />
-
+          <Comments
+            handleUpdate={this.handleUpdate}
+            memberEditing={memberEditing}
+          />
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose('MemberDialog')}>Close</Button>
+          <Button className={classes.cssRoot} onClick={() => handleClose('MemberDialog')}>Cancel</Button>
+          <Button onClick={() => handleClose('MemberDialog')}>Save</Button>
         </DialogActions>
       </Dialog>
     )

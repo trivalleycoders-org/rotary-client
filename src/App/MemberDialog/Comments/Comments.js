@@ -3,46 +3,42 @@ import TextField from 'material-ui/TextField'
 import red from 'material-ui/colors/red'
 import { withStyles } from 'material-ui/styles'
 import Avatar from 'elements/Avatar'
+import Icon from 'material-ui/Icon'
 import { green } from 'logger'
 
 const styles = theme => ({
-  avatar: {
-    color: 'green',
-  },
   textField: {
     // marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 2,
-    width: 200,
   },
   wrapper: {
     display: 'flex',
-    flexFlow: 'row nowrap'
+    flexFlow: 'row nowrap',
+    paddingLeft: theme.spacing.unit,
   }
 })
 
-const Name = ({ classes, handleUpdate, memberEditing }) => {
+const Email = ({ classes, children, handleUpdate, memberEditing }) => {
   return (
     <div className={classes.wrapper}>
-      <Avatar className={classes.avatar}>HI</Avatar>
+      {/* <Icon className={classes.emailIcon}>email</Icon> */}
+
       <TextField
         className={classes.textField}
-        label='First Name'
-        name='firstName'
+        defaultValue="Default Value"
+        fullWidth
+        id="multiline-static"
+        label="Comments"
+        margin="normal"
+        multiline
+        name='comments'
         onChange={(e) => handleUpdate(e)}
-        type='text'
-        value={memberEditing.firstName}
-      />
-      <TextField
-        className={classes.textField}
-        label='Last  Name'
-        name='lastName'
-        onChange={(e) => handleUpdate(e, '')}
-        type='text'
-        value={memberEditing.lastName}
-      />
+        // rows="4"
+        value={memberEditing.comments}
+       />
     </div>
   )
 }
 
-export default withStyles(styles)(Name)
+export default withStyles(styles)(Email)

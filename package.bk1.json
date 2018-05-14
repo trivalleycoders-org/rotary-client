@@ -58,9 +58,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "export NODE_PATH=src && node scripts/start.js",
+    "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.1"
   },
   "jest": {
     "collectCoverageFrom": [

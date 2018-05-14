@@ -14,7 +14,7 @@ class App extends Component {
     MemberDialog: false,
   }
   componentDidMount() {
-    this.props.thunkRequestReadMembers()
+    this.props.requestReadAllMembers()
   }
 
   handleOpenClick = (e, _id, formName) => {
@@ -52,7 +52,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    readMembersStatus: requestSelectors.getRequestStatus(state, memberActions.requestKeyReadMembers),
+    readMembersStatus: requestSelectors.getRequestStatus(state, memberActions.requestKeyReadAllMembers),
   }
 }
 

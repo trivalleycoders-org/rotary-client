@@ -14,8 +14,8 @@ export const keyUpdateMemberEditing = 'actionkeyUpdateMemberEditing'
 export const keySetOpenMemberId = 'actionkeySetOpenMemberId'
 export const keyUnsetOpenMemberId = 'actionkeyUnsetOpenMemberId'
 
-export const requestKeyReadAllMembers = 'requestKeyReadMembers'
-export const requestKeyReplaceOneMember = 'requestKeyReplaceOnemember'
+export const requestKeyReadAllMembers = 'requestKeyReadAllMembers'
+export const requestKeyReplaceOneMember = 'requestKeyReplaceOneMember'
 
 export const replaceOneMember = (member) => {
   orange('replaceOneMember: member', member)

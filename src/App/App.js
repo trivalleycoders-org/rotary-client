@@ -4,7 +4,8 @@ import * as memberActions from 'store/member-actions'
 import * as requestSelectors from 'store/request-selectors'
 import MembersTable from './MembersTable'
 import MemberDialog from './MemberDialog'
-import AppBar from 'elements/AppBar'
+// import AppBar from 'elements/AppBar'
+import AppBar from '../elements/AppBar/AppBar'
 import { green } from 'logger'
 
 

@@ -1,26 +1,26 @@
 import { combineReducers } from 'redux'
 import { merge, clone, remove, insert } from 'ramda'
 import {
-  /*appMemberEditing,*/
-  appReplaceAllMembers,
-  appReplaceOneMember,
-  appSetOpenMemberId,
-  appSetMemberEditing,
-  appUnsetMemberEditing,
-  appUnsetOpenMemberId,
-  appUpdateMemberEditing,
+  /*keyMemberEditing,*/
+  keyReplaceAllMembers,
+  replaceOneMember,
+  keySetOpenMemberId,
+  keySetMemberEditing,
+  keyUnsetMemberEditing,
+  keyUnsetOpenMemberId,
+  keyUpdateMemberEditing,
 } from 'store/member-actions'
 import { blue, red } from 'logger'
 
 
 export const openMemberId = ( state = '', { type, payload }) => {
-  // blue('3) appSetOpenMemberId: type', type)
-  // blue('3) appSetOpenMemberId: payload', payload)
+  // blue('3) keySetOpenMemberId: type', type)
+  // blue('3) keySetOpenMemberId: payload', payload)
   try {
     switch (type) {
-      case appSetOpenMemberId:
+      case keySetOpenMemberId:
         return payload.id
-      case appUnsetOpenMemberId:
+      case keyUnsetOpenMemberId:
         return ''
       default:
         return state
@@ -36,9 +36,9 @@ export const members = ( state = [], { type, payload }) => {
   // blue('members.state', state)
   // blue('state', state)
   switch (type) {
-    case appReplaceAllMembers:
+    case keyReplaceAllMembers:
       return payload.members
-    case appReplaceOneMember:
+    case replaceOneMember:
       // blue('members.payload.member', payload.member)
       const _id = payload.member._id
       const idx = state.findIndex(m => m._id === _id)
@@ -59,11 +59,11 @@ export const roles = ( state = [], { type, payload }) => {
 export const memberEditing = (state = {}, { type, payload }) => {
 
   switch (type) {
-    case appSetMemberEditing:
+    case keySetMemberEditing:
       return payload.member
-    case appUnsetMemberEditing:
+    case keyUnsetMemberEditing:
       return {} // { firstName: '' }
-    case appUpdateMemberEditing:
+    case keyUpdateMemberEditing:
       // field are sometimes sent in as '|' delimited strings
       // e.g., 'roles|photographer'
       // blue('memberEditing: state', state)

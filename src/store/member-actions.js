@@ -3,33 +3,25 @@ import { createRequestThunk } from './action-helpers'
 import api from 'api'
 import { orange } from 'logger'
 
-// actionAppSetMemberEditing
+export const keyReplaceAllMembers = 'actionkeyReplaceAllMembers'
+export const keyReplaceOneMember = 'actionreplaceOneMembers'
 
-export const appAddMember = 'actionAppAddMember'
-export const appReplaceAllMembers = 'actionappReplaceAllMembers'
-export const appReplaceOneMember = 'actionappReplaceOneMembers'
+export const keyMemberEditing = 'actionkeyMemberEditing'
+export const keySetMemberEditing = 'actionkeySetMemberEditing'
+export const keyUnsetMemberEditing = 'actionkeyUnsetMemberEditing'
+export const keyUpdateMemberEditing = 'actionkeyUpdateMemberEditing'
 
-export const appMemberEditing = 'actionAppMemberEditing'
-export const appSetMemberEditing = 'actionAppSetMemberEditing'
-export const appUnsetMemberEditing = 'actionAppUnsetMemberEditing'
-export const appUpdateMemberEditing = 'actionAppUpdateMemberEditing'
+export const keySetOpenMemberId = 'actionkeySetOpenMemberId'
+export const keyUnsetOpenMemberId = 'actionkeyUnsetOpenMemberId'
 
-
-
-
-export const appSetOpenMemberId = 'actionAppSetOpenMemberId'
-export const appUnsetOpenMemberId = 'actionAppUnsetOpenMemberId'
-
-
-
-
-export const requestKeyReadMembers = 'requestKeyReadMembers'
+export const requestKeyReadAllMembers = 'requestKeyReadMembers'
+export const requestKeyReplaceOneMember = 'requestKeyReplaceOnemember'
 
 export const replaceOneMember = (member) => {
   orange('replaceOneMember: member', member)
   return (
     {
-      type: appReplaceOneMember,
+      type: replaceOneMember,
       payload: { member }
     }
   )
@@ -39,7 +31,7 @@ export const setOpenMemberId = (id) => {
   // orange('2) setOpenMemberId', id)
   return (
     {
-      type: appSetOpenMemberId,
+      type: keySetOpenMemberId,
       payload: {
         id
       }
@@ -50,25 +42,15 @@ export const setOpenMemberId = (id) => {
 export const unsetOpenMemberId = () => {
   return (
     {
-      type: appUnsetOpenMemberId,
+      type: keyUnsetOpenMemberId,
     }
   )
-}
-
-export const addMember = (member) => {
-  return (
-    {
-    type: appAddMember,
-    payload: {
-      member
-    }
-  })
 }
 
 export const setMemberEditing = (member) => {
   // orange('setMemberEditing: member', member)
   return ({
-    type: appSetMemberEditing,
+    type: keySetMemberEditing,
     payload: {
       member,
     }
@@ -78,14 +60,14 @@ export const setMemberEditing = (member) => {
 export const unsetMemberEditing = () => {
   // orange('unsetMemberEditing')
   return ({
-    type: appUnsetMemberEditing,
+    type: keyUnsetMemberEditing,
   })
 }
 
 export const updateMemberEditing = (field, value, _id) => {
   // orange('updateMemberEditing', `${field}: ${value}`)
   return ({
-    type: appUpdateMemberEditing,
+    type: keyUpdateMemberEditing,
     payload: {
       field,
       value,
@@ -94,34 +76,56 @@ export const updateMemberEditing = (field, value, _id) => {
   })
 }
 
-// above is newer
-// export const actionMemberEditingId = (id) => {
-//   return ({
-//     type: appMemberEditingId,
-//     payload: { id, }
-//   })
-// }
-
-export const actionMemberEditing = (props) => {
-  // orange('actionMemberEditing: props', props)
-  return ({
-    type: appMemberEditing,
-    payload: { props, }
-  })
-}
-
-
-export const actionReplaceMembers = (members) => {
+export const replaceAllMembers = (members) => {
   // ku.log('replaceMembers: members', members, 'orange')
 //   log('actions.replaceMembers', '', 'yellow')
   return({
-    type: appReplaceAllMembers,
+    type: keyReplaceAllMembers,
     payload: members,
   })
 }
 
-export const thunkRequestReadMembers = createRequestThunk({
+export const requestReadAllMembers = createRequestThunk({
   request: api.members.read,
-  key: requestKeyReadMembers,
-  success: [ actionReplaceMembers ],
+  key: requestKeyReadAllMembers,
+  success: [ replaceAllMembers ],
 })
+
+export const requestReplaceOneMember = createRequestThunk({
+  request: api.members.replaceOne,
+  key: requestKeyReplaceOneMember,
+  success: [ replaceOneMember ],
+})
+
+
+///////////////////////////////////////////////////////
+// Not in use
+export const appAddMember = 'actionAppAddMember' // not used
+export const addMember = (member) => {
+  return (
+    {
+    type: appAddMember,
+    payload: {
+      member
+    }
+  })
+}
+///////////////////////////////////////////////////////
+
+
+
+// above is newer
+// export const actionMemberEditingId = (id) => {
+//   return ({
+//     type: keyMemberEditingId,
+//     payload: { id, }
+//   })
+// }
+
+// export const actionMemberEditing = (props) => {
+//   // orange('actionMemberEditing: props', props)
+//   return ({
+//     type: keyMemberEditing,
+//     payload: { props, }
+//   })
+// }

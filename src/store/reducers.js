@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import { merge, clone } from 'ramda'
+import { merge, clone, remove, insert } from 'ramda'
 import {
   /*appMemberEditing,*/
-  appReplaceMembers,
+  appReplaceAllMembers,
+  appReplaceOneMember,
   appSetOpenMemberId,
   appSetMemberEditing,
   appUnsetMemberEditing,
@@ -32,9 +33,20 @@ export const openMemberId = ( state = '', { type, payload }) => {
 
 // newer above
 export const members = ( state = [], { type, payload }) => {
+  // blue('members.state', state)
+  // blue('state', state)
   switch (type) {
-    case appReplaceMembers:
+    case appReplaceAllMembers:
       return payload.members
+    case appReplaceOneMember:
+      // blue('members.payload.member', payload.member)
+      const _id = payload.member._id
+      const idx = state.findIndex(m => m._id === _id)
+      const removed = remove(idx, 1, state)
+      blue('removed', removed)
+      const newState = insert(idx, payload.member , removed)
+      return newState
+
     default:
       return state
   }
@@ -54,16 +66,16 @@ export const memberEditing = (state = {}, { type, payload }) => {
     case appUpdateMemberEditing:
       // field are sometimes sent in as '|' delimited strings
       // e.g., 'roles|photographer'
-      blue('memberEditing: state', state)
-      blue('memberEditing: payload', payload)
+      // blue('memberEditing: state', state)
+      // blue('memberEditing: payload', payload)
       const fields = payload.field.split('|')
       // for now, there will only be field & subField, no
       // further levels
       const field = fields[0]
       const subField = fields.length === 2 ? fields[1] : null
       const _id = payload._id
-      blue('field', field)
-      blue('subField', subField)
+      // blue('field', field)
+      // blue('subField', subField)
       if (field === 'roles') {
         const newState = clone(state)
         newState.roles = state.roles.map(p => {

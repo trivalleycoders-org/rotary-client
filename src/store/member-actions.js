@@ -6,7 +6,8 @@ import { orange } from 'logger'
 // actionAppSetMemberEditing
 
 export const appAddMember = 'actionAppAddMember'
-export const appReplaceMembers = 'actionAppReplaceMembers'
+export const appReplaceAllMembers = 'actionappReplaceAllMembers'
+export const appReplaceOneMember = 'actionappReplaceOneMembers'
 
 export const appMemberEditing = 'actionAppMemberEditing'
 export const appSetMemberEditing = 'actionAppSetMemberEditing'
@@ -23,6 +24,16 @@ export const appUnsetOpenMemberId = 'actionAppUnsetOpenMemberId'
 
 
 export const requestKeyReadMembers = 'requestKeyReadMembers'
+
+export const replaceOneMember = (member) => {
+  orange('replaceOneMember: member', member)
+  return (
+    {
+      type: appReplaceOneMember,
+      payload: { member }
+    }
+  )
+}
 
 export const setOpenMemberId = (id) => {
   // orange('2) setOpenMemberId', id)
@@ -104,7 +115,7 @@ export const actionReplaceMembers = (members) => {
   // ku.log('replaceMembers: members', members, 'orange')
 //   log('actions.replaceMembers', '', 'yellow')
   return({
-    type: appReplaceMembers,
+    type: appReplaceAllMembers,
     payload: members,
   })
 }

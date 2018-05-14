@@ -46,6 +46,9 @@ const styles = theme => ({
 })
 
 class MemberDialog extends Component {
+  state = {
+    dirty: false
+  }
   componentDidUpdate(prevProps, prevState, snapshot) {
     // green('this.props.open', this.props.open)
     // green('memberEditing', this.props.memberEditing)
@@ -65,6 +68,15 @@ class MemberDialog extends Component {
       value = e.target.value
     }
     this.props.updateMemberEditing(field, value, _id)
+    this.setState({
+      dirty: true,
+    })
+  }
+  handleSaveClick = (e, memberEditing) => {
+
+    green('handleSaveClick: this.props.memberEditing', this.props.memberEditing)
+    this.props.replaceOneMember(this.props.memberEditing)
+    this.props.handleClose('MemberDialog')
   }
 
   render() {
@@ -76,7 +88,7 @@ class MemberDialog extends Component {
       open,
       openMemberId,
     } = this.props
-
+    green('render: this.props.memberEditing', this.props.memberEditing)
     return (
       <Dialog open={open}>
         <DialogTitle className={classes.title} id='dt-edit-member'>
@@ -115,7 +127,8 @@ class MemberDialog extends Component {
           </Button>
           <Button
             color='primary'
-            onClick={() => handleClose('MemberDialog')}>
+            disabled={!this.state.dirty}
+            onClick={(e, memberEditing) => this.handleSaveClick(e, memberEditing)}>
             Save
           </Button>
         </DialogActions>

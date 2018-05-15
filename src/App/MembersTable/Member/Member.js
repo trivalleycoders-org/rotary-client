@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import {TableCell, TableRow} from 'material-ui/Table'
-import Button from 'material-ui/Button'
 import shortid from 'shortid'
-// import RoleSwitch from './RoleSwitch'
+import { Icon, IconButton } from 'material-ui'
+import Cell from './Cell'
 import { green } from 'logger'
 
 class Member extends Component {
-
+  cellClick = (e) => {
+    this.props.handleOpenClick(e, this.props._id, 'MemberDialog')
+  }
   render() {
     const {
       firstName,
@@ -23,18 +25,17 @@ class Member extends Component {
     const renderPhone = phone.map((p) => {
       return (<div key={shortid.generate()}>{`${p.phoneType}: ${p.phoneNumber}`}</div>)
     })
-    // green('Member: _id', _id)
-    // const renderRoles = roles.map((r) => {
-    //   return (<div key={shortid.generate()}>{`${r}`}</div>)
-    // })
+
     return (
-      <TableRow onClick={event => handleOpenClick(event, _id, 'MemberDialog')}>
-        <TableCell>{firstName}</TableCell>
-        <TableCell>{lastName}</TableCell>
-        <TableCell>{comments}</TableCell>
-        <TableCell>{exempt ? 'Yes': 'No'}</TableCell>
-        <TableCell>{renderPhone}</TableCell>
-        <TableCell>{email}</TableCell>
+      <TableRow>
+        <Cell cellClick={this.cellClick}>{firstName}</Cell>
+        <Cell cellClick={this.cellClick}>{lastName}</Cell>
+        <Cell cellClick={this.cellClick}>{comments}</Cell>
+        <Cell cellClick={this.cellClick}>{exempt ? 'Yes': 'No'}</Cell>
+        <Cell cellClick={this.cellClick}>{renderPhone}</Cell>
+        <Cell cellClick={this.cellClick}>{email}</Cell>
+        <TableCell><IconButton><Icon>edit</Icon></IconButton></TableCell>
+        <TableCell><IconButton><Icon>delete</Icon></IconButton></TableCell>
       </TableRow>
     )
   }
@@ -42,9 +43,3 @@ class Member extends Component {
 }
 
 export default Member
-
-/*
-<TableCell>{comments}</TableCell>
-<TableCell>{renderRoles}</TableCell>
-<TableCell>{exempt ? 'Yes' : 'No'}</TableCell>
-*/

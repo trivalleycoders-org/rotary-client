@@ -2,13 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as memberActions from 'store/member-actions'
 import * as memberSelectors from 'store/member-selectors'
-
 import { isEmpty } from 'ramda'
-
-
 import { compose } from 'recompose'
 import MemberDialog from './MemberDialog'
-
 import { green } from 'logger'
 
 class MemberDialogContainer extends Component {
@@ -16,6 +12,7 @@ class MemberDialogContainer extends Component {
     dirty: false
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
+    green('componentDidUpdate')
     // green('this.props.open', this.props.open)
     // green('memberEditing', this.props.memberEditing)
     if (this.props.open && isEmpty(this.props.memberEditing)) {

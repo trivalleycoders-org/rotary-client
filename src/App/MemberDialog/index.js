@@ -1,1 +1,1 @@
-export { default } from './MemberDialog'
+export { default } from './MemberDialogContainer'

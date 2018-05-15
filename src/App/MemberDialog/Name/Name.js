@@ -22,6 +22,7 @@ const styles = theme => ({
 })
 
 const Name = ({ classes, handleUpdate, memberEditing }) => {
+  // green('Name: handleUpdate', handleUpdate)
   return (
     <div className={classes.wrapper}>
       <Avatar className={classes.avatar}>HI</Avatar>

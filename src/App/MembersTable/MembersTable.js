@@ -52,10 +52,9 @@ const MembersTable = ({ members, handleOpenClick }) => {
 }
 
 const mapStateToProps = (state) => {
-  const o = {
+  return {
     members: memberSelectors.getAllMembers(state),
   }
-  return o
 }
 
 export default connect(mapStateToProps, actions)(MembersTable)

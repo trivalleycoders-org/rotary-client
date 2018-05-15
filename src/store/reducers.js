@@ -4,14 +4,30 @@ import {
   /*keyMemberEditing,*/
   keyReplaceAllMembers,
   updateOneMember,
+  keySetMemberDialogAction,
   keySetOpenMemberId,
   keySetMemberEditing,
+  keyUnsetMemberDialogAction,
   keyUnsetMemberEditing,
   keyUnsetOpenMemberId,
   keyUpdateMemberEditing,
 } from 'store/member-actions'
 import { blue, red } from 'logger'
 
+export const memberDialogAction = ( state = '', { type, payload }) => {
+  try {
+    switch (type) {
+      case keySetMemberDialogAction:
+        return payload.id
+      case keyUnsetMemberDialogAction:
+        return ''
+      default:
+        return state
+    }
+  } catch (e) {
+    red('ERROR: memberDialogAction: ', e)
+  }
+}
 
 export const openMemberId = ( state = '', { type, payload }) => {
   // blue('3) keySetOpenMemberId: type', type)
@@ -127,7 +143,11 @@ export default combineReducers({
   members,
   requests,
   roles,
-  openMemberId,
-  memberEditing,
-
+  uiData: combineReducers({
+    members: combineReducers({
+      memberDialogAction,
+      openMemberId,
+      memberEditing,
+    })
+  })
 })

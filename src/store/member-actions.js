@@ -3,26 +3,51 @@ import { createRequestThunk } from './action-helpers'
 import api from 'api'
 import { orange } from 'logger'
 
-export const keyReplaceAllMembers = 'actionkeyReplaceAllMembers'
+export const keyReplaceAllMembers = 'actionKeyReplaceAllMembers'
 export const keyUpdateOneMember = 'actionUpdateOneMembers'
 
-export const keyMemberEditing = 'actionkeyMemberEditing'
-export const keySetMemberEditing = 'actionkeySetMemberEditing'
-export const keyUnsetMemberEditing = 'actionkeyUnsetMemberEditing'
-export const keyUpdateMemberEditing = 'actionkeyUpdateMemberEditing'
+export const keyMemberEditing = 'actionKeyMemberEditing'
+export const keySetMemberDialogAction = 'actionKeySetMemberDialogAction'
+export const keySetMemberEditing = 'actionKeySetMemberEditing'
+export const keyUnsetMemberDialogAction = 'actionKeyUnsetMemberDialogAction'
+export const keyUnsetMemberEditing = 'actionKeyUnsetMemberEditing'
+export const keyUpdateMemberEditing = 'actionKeyUpdateMemberEditing'
 
-export const keySetOpenMemberId = 'actionkeySetOpenMemberId'
-export const keyUnsetOpenMemberId = 'actionkeyUnsetOpenMemberId'
+export const keySetOpenMemberId = 'actionKeySetOpenMemberId'
+export const keyUnsetOpenMemberId = 'actionKeyUnsetOpenMemberId'
 
 export const requestKeyReadAllMembers = 'requestKeyReadAllMembers'
 export const requestKeyUpdateOneMember = 'requestKeyUpdateOneMember'
 
 export const updateOneMember = (member) => {
-  orange('updateOneMember: member', member)
+  // orange('updateOneMember: member', member)
   return (
     {
       type: updateOneMember,
       payload: { member }
+    }
+  )
+}
+
+
+export const setMemberDialogAction = (action) => {
+  // actions: edit, add
+
+  // orange('2) setOpenMemberId', id)
+  return (
+    {
+      type: keySetMemberDialogAction,
+      payload: {
+        action
+      }
+    }
+  )
+}
+
+export const unsetMemberDialogAction = () => {
+  return (
+    {
+      type: keyUnsetMemberDialogAction,
     }
   )
 }
@@ -108,22 +133,3 @@ export const addMember = (member) => {
     }
   })
 }
-///////////////////////////////////////////////////////
-
-
-
-// above is newer
-// export const actionMemberEditingId = (id) => {
-//   return ({
-//     type: keyMemberEditingId,
-//     payload: { id, }
-//   })
-// }
-
-// export const actionMemberEditing = (props) => {
-//   // orange('actionMemberEditing: props', props)
-//   return ({
-//     type: keyMemberEditing,
-//     payload: { props, }
-//   })
-// }

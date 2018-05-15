@@ -17,7 +17,7 @@ class App extends Component {
     this.props.requestReadAllMembers()
   }
 
-  handleOpenClick = (e, _id, formName) => {
+  handleOpenClick = (e, _id, formName, action) => {
     this.props.setOpenMemberId(_id)
     this.setState({
       [formName]: true

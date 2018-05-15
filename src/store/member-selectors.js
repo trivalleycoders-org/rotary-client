@@ -10,17 +10,12 @@ export const getOneMember = (state, _id) => {
   return m[0] || {}
 }
 
-export const memberEditingId = (state) => {
-  return state.memberEdit.memberEditingId || null
-}
-
 export const getOpenMemberId = (state) => {
   // yellow('getOpenMemberId: state', state)
-  const r = state.openMemberId || null
-
+  const r = state.uiData.members.openMemberId || null
   return r
 }
 
 export const getMemberEditing = (state) => {
-  return state.memberEditing || null
+  return state.uiData.members.memberEditing || null
 }

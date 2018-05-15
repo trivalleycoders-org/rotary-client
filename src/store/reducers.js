@@ -3,7 +3,7 @@ import { merge, clone, remove, insert } from 'ramda'
 import {
   /*keyMemberEditing,*/
   keyReplaceAllMembers,
-  replaceOneMember,
+  updateOneMember,
   keySetOpenMemberId,
   keySetMemberEditing,
   keyUnsetMemberEditing,
@@ -38,7 +38,7 @@ export const members = ( state = [], { type, payload }) => {
   switch (type) {
     case keyReplaceAllMembers:
       return payload.members
-    case replaceOneMember:
+    case updateOneMember:
       // blue('members.payload.member', payload.member)
       const _id = payload.member._id
       const idx = state.findIndex(m => m._id === _id)
@@ -46,7 +46,13 @@ export const members = ( state = [], { type, payload }) => {
       blue('removed', removed)
       const newState = insert(idx, payload.member , removed)
       return newState
-
+    // case replaceOneMember:
+    //   const _id = payload.member._id
+    //   const idx = state.findIndex(m => m._id === _id)
+    //   const removed = remove(idx, 1, state)
+    //   blue('removed', removed)
+    //   const newState = insert(idx, payload.member , removed)
+    //   return newState
     default:
       return state
   }

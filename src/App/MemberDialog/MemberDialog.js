@@ -72,10 +72,17 @@ class MemberDialog extends Component {
       dirty: true,
     })
   }
+  handleCloseClick = () => {
+    this.props.unsetOpenMemberId()
+    this.props.unsetMemberEditing()
+    this.props.handleClose('MemberDialog')
+  }
   handleSaveClick = (e, memberEditing) => {
 
-    green('handleSaveClick: this.props.memberEditing', this.props.memberEditing)
-    this.props.replaceOneMember(this.props.memberEditing)
+    // green('handleSaveClick: this.props.memberEditing', this.props.memberEditing)
+    this.props.requestUpdateOneMember(this.props.memberEditing)
+    this.props.unsetOpenMemberId()
+    this.props.unsetMemberEditing()
     this.props.handleClose('MemberDialog')
   }
 
@@ -88,7 +95,7 @@ class MemberDialog extends Component {
       open,
       openMemberId,
     } = this.props
-    green('render: this.props.memberEditing', this.props.memberEditing)
+    if (isEmpty(memberEditing)) { return null}
     return (
       <Dialog open={open}>
         <DialogTitle className={classes.title} id='dt-edit-member'>
@@ -122,7 +129,7 @@ class MemberDialog extends Component {
         <DialogActions>
           <Button
             color='primary'
-            onClick={() => handleClose('MemberDialog')}>
+            onClick={() => this.handleCloseClick()}>
             Cancel
           </Button>
           <Button

@@ -16,7 +16,6 @@ const styles = theme => ({
 
 const Roles = ({ classes, handleUpdate, roles}) => {
   const renderRoles = roles.map(r => {
-    green('r.avoid', r.avoid)
     return (
       <Role
         key={r._id}

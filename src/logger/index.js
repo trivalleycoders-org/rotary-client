@@ -1,58 +1,58 @@
 const styleRed = [
   'color: #ff0000',
   'font-weight: bold',
-].join(';');
+].join(';')
 
 const styleGreen = [
   'color: #00ff00',
   'font-weight: bold',
-].join(';');
+].join(';')
 
 const styleBlue = [
   'color: #00ced1',
   'font-weight: bold',
-].join(';');
+].join(';')
 
 const styleOrange = [
   'color: #ffa500',
   'font-weight: bold',
-].join(';');
+].join(';')
 
 const stylePink = [
   'color: #ff69b4',
   'font-weight: bold',
-].join(';');
+].join(';')
 const styleYellow = [
   'color: #ffd700',
   'font-weight: bold',
-].join(';');
+].join(';')
 
 const getStyle = (styleName) => {
-  let color;
+  let color
   switch (styleName) {
     case 'red':
-      color = styleRed;
-      break;
+      color = styleRed
+      break
     case 'blue':
-      color = styleBlue;
-      break;
+      color = styleBlue
+      break
     case 'green':
-      color = styleGreen;
-      break;
+      color = styleGreen
+      break
     case 'orange':
-      color = styleOrange;
-      break;
+      color = styleOrange
+      break
     case 'pink':
-      color = stylePink;
-      break;
+      color = stylePink
+      break
     case 'yellow':
       color = styleYellow
-      break;
+      break
     default:
-      color = '';
+      color = ''
   }
 
-  return color;
+  return color
 }
 
 const makeMessage = (message = '', value = '', color = '') => {
@@ -79,6 +79,10 @@ export const orange = (message = '', value = '') => {
   makeMessage(message, value, 'orange')
 }
 
+export const pink = (message = '', value = '') => {
+  makeMessage(message, value, 'pink')
+}
+
 export const log = (message = '', value = '', color = '') => {
   let count = 3
   if (color === '') { count-- }
@@ -91,10 +95,10 @@ export const log = (message = '', value = '', color = '') => {
   } else {
     nMessage = `%c[${message}]`
   }
-  const style = getStyle(color);
+  const style = getStyle(color)
 
   // eslint-disable-next-line no-console
-  console.log(nMessage, style, value);
+  console.log(nMessage, style, value)
 }
 
-export default { log, yellow, blue, green }
+export default { log, yellow, blue, green, pink }

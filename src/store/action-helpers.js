@@ -16,14 +16,14 @@ const markRequestPending = (key) => {
     type: 'app/markRequestPending',
     meta: { key },
   }
-};
+}
 
 const markRequestSuccess = (key) => {
   // log(`success (${key})`, '', 'blue')
   return ({
     type: 'app/markRequestSuccess',
     meta: { key },
-  });
+  })
 }
 
 const markRequestFailed = (reason, key) => {

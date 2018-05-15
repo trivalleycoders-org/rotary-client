@@ -4,7 +4,7 @@ import api from 'api'
 import { orange } from 'logger'
 
 export const keyReplaceAllMembers = 'actionkeyReplaceAllMembers'
-export const keyReplaceOneMember = 'actionreplaceOneMembers'
+export const keyUpdateOneMember = 'actionUpdateOneMembers'
 
 export const keyMemberEditing = 'actionkeyMemberEditing'
 export const keySetMemberEditing = 'actionkeySetMemberEditing'
@@ -15,13 +15,13 @@ export const keySetOpenMemberId = 'actionkeySetOpenMemberId'
 export const keyUnsetOpenMemberId = 'actionkeyUnsetOpenMemberId'
 
 export const requestKeyReadAllMembers = 'requestKeyReadAllMembers'
-export const requestKeyReplaceOneMember = 'requestKeyReplaceOneMember'
+export const requestKeyUpdateOneMember = 'requestKeyUpdateOneMember'
 
-export const replaceOneMember = (member) => {
-  orange('replaceOneMember: member', member)
+export const updateOneMember = (member) => {
+  orange('updateOneMember: member', member)
   return (
     {
-      type: replaceOneMember,
+      type: updateOneMember,
       payload: { member }
     }
   )
@@ -77,8 +77,6 @@ export const updateMemberEditing = (field, value, _id) => {
 }
 
 export const replaceAllMembers = (members) => {
-  // ku.log('replaceMembers: members', members, 'orange')
-//   log('actions.replaceMembers', '', 'yellow')
   return({
     type: keyReplaceAllMembers,
     payload: members,
@@ -91,10 +89,10 @@ export const requestReadAllMembers = createRequestThunk({
   success: [ replaceAllMembers ],
 })
 
-export const requestReplaceOneMember = createRequestThunk({
-  request: api.members.replaceOne,
-  key: requestKeyReplaceOneMember,
-  success: [ replaceOneMember ],
+export const requestUpdateOneMember = createRequestThunk({
+  request: api.members.patch,
+  key: requestKeyUpdateOneMember,
+  success: [ updateOneMember ],
 })
 
 

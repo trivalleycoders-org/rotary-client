@@ -26,7 +26,6 @@ const Email = ({ classes, children, handleUpdate, memberEditing }) => {
 
       <TextField
         className={classes.textField}
-        defaultValue="Default Value"
         fullWidth
         id="multiline-static"
         label="Comments"

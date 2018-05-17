@@ -1,25 +1,29 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import * as memberActions from 'store/member-actions'
 import * as requestSelectors from 'store/request-selectors'
 import MembersTable from './MembersTable'
 import MemberDialog from './MemberDialog'
 import AppBar from 'elements/AppBar'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+
 import { green } from 'logger'
 
 
 class App extends Component {
   state = {
     MemberDialog: false,
+    action: '',
   }
   componentDidMount() {
     this.props.requestReadAllMembers()
   }
 
-  handleOpenClick = (e, _id, formName, action) => {
+  handleMemberRowClick = ({ e, _id, formName, action }) => {
     this.props.setOpenMemberId(_id)
     this.setState({
-      [formName]: true
+      [formName]: true,
+      action: action,
     })
   }
 
@@ -37,14 +41,22 @@ class App extends Component {
       return (<h1>Loading...</h1>)
     }
     return (
-      <div>
-        <AppBar title='Rotary Club' />
-        <MembersTable handleOpenClick={this.handleOpenClick} />
-        <MemberDialog
-          open={this.state.MemberDialog}
-          handleClose={this.handleClose}
-        />
-      </div>
+      <Router>
+        <Fragment>
+          <AppBar title='Rotary Club' />
+          <MembersTable handleMemberRowClick={this.handleMemberRowClick} />
+          <Route
+            exact
+            path='/'
+            render={props => <MemberDialog
+              open={this.state.MemberDialog}
+              handleClose={this.handleClose}
+              action={this.state.action}
+              {...props}
+            />}
+          />
+        </Fragment>
+      </Router>
     )
   }
 }

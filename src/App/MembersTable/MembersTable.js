@@ -1,15 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'recompose'
+import { withStyles } from '@material-ui/core/styles'
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import * as memberActions from 'store/member-actions'
 import * as memberSelectors from 'store/member-selectors'
+import Button from '@material-ui/core/Button'
+import AddIcon from '@material-ui/icons/Add'
+import DeleteIcon from '@material-ui/icons/Delete'
 import Paper from '@material-ui/core/Paper'
 import Member from './Member'
 import { green } from 'logger'
 
-const actions = { ...memberActions }
+const styles = theme => ({
+  paper: {
+    position: 'relative',
+    paddingBottom: 56 + theme.spacing.unit * 4,
+  },
+  button: {
+    position: 'absolute',
+    // right: '40px',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
 
-const MembersTable = ({ members, handleOpenClick }) => {
+  },
+})
+
+const MembersTable = ({ classes, handleMemberRowClick, members }) => {
 
   const rows = members.map(m => {
     // green('MembersTable: m._id', m._id)
@@ -25,7 +42,7 @@ const MembersTable = ({ members, handleOpenClick }) => {
         // roles={m.roles}
         phone={m.phone}
         email={m.email}
-        handleOpenClick={handleOpenClick}
+        handleMemberRowClick={handleMemberRowClick}
       />
     )
   })
@@ -47,6 +64,15 @@ const MembersTable = ({ members, handleOpenClick }) => {
           {rows}
         </TableBody>
       </Table>
+      <Button
+        variant="fab"
+        color="primary"
+        aria-label="add"
+        className={classes.button}
+        onClick={e => memberRowClick({ e: e, formName: 'MemberDialog', action: 'add' })}
+      >
+        <AddIcon />
+      </Button>
     </Paper>
   )
 }
@@ -57,4 +83,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(MembersTable)
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, memberActions)
+)(MembersTable)

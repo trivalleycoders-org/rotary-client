@@ -4,20 +4,24 @@ import shortid from 'shortid'
 import { Icon, IconButton } from '@material-ui/core'
 import Cell from './Cell'
 import { green } from 'logger'
+import { MEMBER_DIALOG } from 'App/const'
 
 class Member extends Component {
-  cellClick = (e) => {
-    this.props.handleOpenClick(e, this.props._id, 'MemberDialog')
+
+  memberRowClick = (e, action) => {
+    green('Member.memberRowClick: action', action)
+    this.props.handleMemberRowClick({ e: e, _id: this.props._id, formName: MEMBER_DIALOG, action: action })
   }
+
   render() {
     const {
+      _id,
       firstName,
       comments,
       email,
       exempt,
-      handleOpenClick ,
-      _id,
       lastName,
+      handleMemberRowClick,
       phone,
       /*roles,*/
      } = this.props
@@ -28,12 +32,12 @@ class Member extends Component {
 
     return (
       <TableRow>
-        <Cell cellClick={this.cellClick}>{firstName}</Cell>
-        <Cell cellClick={this.cellClick}>{lastName}</Cell>
-        <Cell cellClick={this.cellClick}>{comments}</Cell>
-        <Cell cellClick={this.cellClick}>{exempt ? 'Yes': 'No'}</Cell>
-        <Cell cellClick={this.cellClick}>{renderPhone}</Cell>
-        <Cell cellClick={this.cellClick}>{email}</Cell>
+        <TableCell onClick={e => this.memberRowClick(e, 'view')}>{firstName}</TableCell>
+        <TableCell onClick={e => this.memberRowClick(e, 'view')}>{lastName}</TableCell>
+        <TableCell onClick={e => this.memberRowClick(e, 'view')}>{comments}</TableCell>
+        <TableCell onClick={e => this.memberRowClick(e, 'view')}>{exempt ? 'Yes': 'No'}</TableCell>
+        <TableCell onClick={e => this.memberRowClick(e, 'view')}>{renderPhone}</TableCell>
+        <TableCell onClick={e => this.memberRowClick(e, 'view')}>{email}</TableCell>
         <TableCell><IconButton><Icon>edit</Icon></IconButton></TableCell>
         <TableCell><IconButton><Icon>delete</Icon></IconButton></TableCell>
       </TableRow>

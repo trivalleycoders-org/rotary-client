@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import * as memberActions from 'store/member-actions'
 import * as memberSelectors from 'store/member-selectors'
 import { isEmpty } from 'ramda'
 import { compose } from 'recompose'
-import MemberDialog from './MemberDialog'
+import MemberDialogView from './MemberDialogView'
+import MemberDialogEdit from './MemberDialogEdit'
+import MemberDialogAdd from './MemberDialogAdd'
+import MemberDialogDelete from './MemberDialogDelete'
 import { green } from 'logger'
+import { MEMBER_DIALOG } from 'App/const'
 
 class MemberDialogContainer extends Component {
   state = {
@@ -38,7 +42,7 @@ class MemberDialogContainer extends Component {
   handleCloseClick = () => {
     this.props.unsetOpenMemberId()
     this.props.unsetMemberEditing()
-    this.props.handleClose('MemberDialog')
+    this.props.handleClose(MEMBER_DIALOG)
   }
   handleSaveClick = (e, memberEditing) => {
 
@@ -46,23 +50,59 @@ class MemberDialogContainer extends Component {
     this.props.requestUpdateOneMember(this.props.memberEditing)
     this.props.unsetOpenMemberId()
     this.props.unsetMemberEditing()
-    this.props.handleClose('MemberDialog')
+    this.props.handleClose(MEMBER_DIALOG)
   }
 
   render() {
-    const { member, memberEditing, open, openMemberId } = this.props
+    const { action, member, memberEditing, open, openMemberId } = this.props
     if (isEmpty(memberEditing)) { return null}
+    const form = () => {
+      if (action === 'view') {
+        return <MemberDialogView
+          handleClose={this.handleCloseClick}
+          member={member}
+          open={open}
+          openMemberId={openMemberId}
+        />
+      }
+      if (action === 'edit') {
+        return <MemberDialogEdit
+          dirty={this.state.dirty}
+          handleCloseClick={this.handleCloseClick}
+          handleSaveClick={this.handleSaveClick}
+          handleUpdate={this.handleUpdate}
+          member={member}
+          memberEditing={memberEditing}
+          open={open}
+          openMemberId={openMemberId}
+        />
+      }
+      if (action === 'add') {
+        return <MemberDialogAdd
+          dirty={this.state.dirty}
+          handleCloseClick={this.handleCloseClick}
+          handleSaveClick={this.handleSaveClick}
+          handleUpdate={this.handleUpdate}
+          member={member}
+          memberEditing={memberEditing}
+          open={open}
+          openMemberId={openMemberId}
+        />
+      }
+      if (action === 'delete') {
+        return <MemberDialogDelete
+          handleClose={this.handleCloseClick}
+          open={open}
+        />
+      }
+      return null
+
+    }
+
     return (
-      <MemberDialog
-        dirty={this.state.dirty}
-        handleCloseClick={this.handleCloseClick}
-        handleSaveClick={this.handleSaveClick}
-        handleUpdate={this.handleUpdate}
-        member={member}
-        memberEditing={memberEditing}
-        open={open}
-        openMemberId={openMemberId}
-      />
+      <Fragment>
+        {form()}
+      </Fragment>
     )
   }
 

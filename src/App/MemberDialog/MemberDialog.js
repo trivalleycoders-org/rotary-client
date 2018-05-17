@@ -11,7 +11,7 @@ import { Icon } from '@material-ui/core'
 
 import Email from './Email'
 import Comments from './Comments'
-import { red, gray } from '@material-ui/core/colors'
+import { red, grey } from '@material-ui/core/colors'
 import { green } from 'logger'
 
 const styles = theme => ({

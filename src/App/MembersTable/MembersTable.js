@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Table, {TableBody, TableCell, TableHead, TableRow} from 'material-ui/Table'
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import * as memberActions from 'store/member-actions'
 import * as memberSelectors from 'store/member-selectors'
 import Paper from '@material-ui/core/Paper'

@@ -1,9 +1,9 @@
 import React from 'react'
 import { TextField } from '@material-ui/core'
-import red from 'material-ui/colors/red'
+import { red } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from 'elements/Avatar'
-import { Email } from '@material-ui/icons/Email'
+import { Email as EmailIcon } from '@material-ui/icons'
 
 import { green } from 'logger'
 
@@ -41,10 +41,10 @@ const styles = theme => ({
   }
 })
 
-const EmailComp = ({ classes, children, handleUpdate, memberEditing }) => {
+const Email = ({ classes, children, handleUpdate, memberEditing }) => {
   return (
     <div className={classes.wrapper}>
-      <Email className={classes.emailIcon}>email</Email>
+      <EmailIcon className={classes.emailIcon}>email</EmailIcon>
       <TextField
         className={classes.emailField}
         label='Email'
@@ -57,4 +57,4 @@ const EmailComp = ({ classes, children, handleUpdate, memberEditing }) => {
   )
 }
 
-export default withStyles(styles)(EmailComp)
+export default withStyles(styles)(Email)

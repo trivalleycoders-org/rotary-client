@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
-import deepOrange from 'material-ui/colors/deepOrange'
-import deepPurple from 'material-ui/colors/deepPurple'
+import { deepOrange, deepPurple } from '@material-ui/core/colors'
 
 const styles = theme => ({
   // avatar: {

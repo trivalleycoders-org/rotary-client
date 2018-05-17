@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextField } from '@material-ui/core'
-import red from 'material-ui/colors/red'
+import { red } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from 'elements/Avatar'
 import { green } from 'logger'

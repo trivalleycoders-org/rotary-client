@@ -1,7 +1,7 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
+import { TextField } from '@material-ui/core'
 import red from 'material-ui/colors/red'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import Avatar from 'elements/Avatar'
 import { green } from 'logger'
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Role from './Role'
 import SubHeading from 'elements/SubHeading'
-import Paper from 'material-ui/Paper'
+import Paper from '@material-ui/core/Paper'
 import Caption from 'elements/Caption'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import { green } from 'logger'
 
 const styles = theme => ({

@@ -1,9 +1,10 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
-import red from 'material-ui/colors/red'
-import { withStyles } from 'material-ui/styles'
+import { TextField } from '@material-ui/core'
+import { red } from '@material-ui/core/colors'
+import { withStyles } from '@material-ui/core/styles'
 import Avatar from 'elements/Avatar'
-import Icon from 'material-ui/Icon'
+import { Icon } from '@material-ui/core'
+
 import { green } from 'logger'
 
 const styles = theme => ({
@@ -19,7 +20,7 @@ const styles = theme => ({
   }
 })
 
-const Email = ({ classes, children, handleUpdate, memberEditing }) => {
+const Comments = ({ classes, children, handleUpdate, memberEditing }) => {
   return (
     <div className={classes.wrapper}>
       {/* <Icon className={classes.emailIcon}>email</Icon> */}
@@ -40,4 +41,4 @@ const Email = ({ classes, children, handleUpdate, memberEditing }) => {
   )
 }
 
-export default withStyles(styles)(Email)
+export default withStyles(styles)(Comments)

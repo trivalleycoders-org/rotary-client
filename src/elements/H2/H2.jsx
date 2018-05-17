@@ -1,7 +1,7 @@
 import React from 'react'
 // import styled from 'styled-components'
 import { brightBlue } from '../../colors'
-import Typography from 'material-ui/Typography'
+import { Typography } from '@material-ui/core'
 
 
 const H2 = ({ children }) => {

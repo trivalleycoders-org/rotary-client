@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {TableCell, TableRow} from 'material-ui/Table'
+import {TableCell, TableRow} from '@material-ui/core'
 import shortid from 'shortid'
-import { Icon, IconButton } from 'material-ui'
+import { Icon, IconButton } from '@material-ui/core'
 import Cell from './Cell'
 import { green } from 'logger'
 

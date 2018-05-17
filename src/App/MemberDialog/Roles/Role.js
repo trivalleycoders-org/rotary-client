@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Switch from 'material-ui/Switch'
-import { /*FormGroup,*/ FormControlLabel } from 'material-ui/Form'
-import green from 'material-ui/colors/green'
-import { withStyles } from 'material-ui/styles'
+import { Switch } from '@material-ui/core'
+import { /*FormGroup,*/ FormControlLabel } from '@material-ui/core'
+import { green } from '@material-ui/core/colors'
+import { withStyles } from '@material-ui/core/styles'
 import { blue } from 'logger'
 
 const styles = {

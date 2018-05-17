@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { withStyles } from 'material-ui/styles'
-import Avatar from 'material-ui/Avatar'
+import { withStyles } from '@material-ui/core/styles'
+import Avatar from '@material-ui/core/Avatar'
 import deepOrange from 'material-ui/colors/deepOrange'
 import deepPurple from 'material-ui/colors/deepPurple'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Typography from 'material-ui/Typography'
+import { Typography } from '@material-ui/core'
 
 const Section = ({ title, subTitle, l0, l1, l2, l3, l4, children }) => {
 

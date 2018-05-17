@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import TextField from 'material-ui/TextField'
-import { withStyles } from 'material-ui/styles'
-import Icon from 'material-ui/Icon'
+import { TextField } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import PhoneIcon from       '@material-ui/icons/Phone'
+// import AccessAlarmIcon from '@material-ui/icons/AccessAlarm'
+
 import { green } from 'logger'
 
 const styles = theme => ({
@@ -19,10 +21,10 @@ const styles = theme => ({
   },
 })
 
-const Phone = ({ classes, _id, handleUpdate, phoneNumber, phoneType }) => {
+const PhoneComp = ({ classes, _id, handleUpdate, phoneNumber, phoneType }) => {
   return (
     <div key={_id}>
-      <Icon className={classes.icon}>phone</Icon>
+      <PhoneIcon className={classes.icon}>phone</PhoneIcon>
       <TextField
         className={classes.textField}
         label='Phone'
@@ -42,4 +44,4 @@ const Phone = ({ classes, _id, handleUpdate, phoneNumber, phoneType }) => {
   )
 }
 
-export default withStyles(styles)(Phone)
+export default withStyles(styles)(PhoneComp)

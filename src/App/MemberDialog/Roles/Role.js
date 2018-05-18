@@ -3,6 +3,7 @@ import { Switch } from '@material-ui/core'
 import { /*FormGroup,*/ FormControlLabel } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
+import { VIEW } from 'App/const'
 import { blue } from 'logger'
 
 const styles = {
@@ -39,8 +40,9 @@ class RoleSwitch extends Component {
     // this.props.handleRoleChange({id: switchId, checked: checked})
   }
   render() {
-    const { _id, hanedleUpdate, name, /*handleRoleChange,*/ avoid, classes } = this.props
+    const { _id, action, avoid, classes, hanedleUpdate, name } = this.props
     // blue('ExemptSwitch: switchName', switchName)
+    blue('action', action)
     return (
       <FormControlLabel
         label={name}
@@ -49,7 +51,11 @@ class RoleSwitch extends Component {
           <Switch
             checked={this.state.checked}
             name='roles|avoid'
-            onChange={(e) => this.handleCheckedChange(e, _id, 'switch')}
+            onChange={
+              action !== VIEW
+                ? (e) => this.handleCheckedChange(e, _id, 'switch')
+                : null
+            }
             //value={avoid}
             classes={{
               switchBase: classes.switchBase,

@@ -8,7 +8,7 @@ import Roles from './Roles'
 import Name from './Name'
 import Caption from 'elements/Caption'
 import { Icon } from '@material-ui/core'
-
+import { VIEW } from 'App/const'
 import Email from './Email'
 import Comments from './Comments'
 import { red, grey } from '@material-ui/core/colors'
@@ -40,34 +40,35 @@ const styles = theme => ({
 })
 
 const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSaveClick, handleUpdate, member, memberEditing, open, openMemberId }) => {
-
   return (
     <Dialog open={open}>
       <DialogTitle className={classes.title} id='dt-edit-member'>
-        Edit Member
-        <Caption>ID: {openMemberId}</Caption>
-      </DialogTitle>
-      <DialogContent className={classes.content}>
         <Name
           handleUpdate={handleUpdate}
-          memberEditing={memberEditing}
+          memberEditing={member}
+          action={VIEW}
         />
-
+      </DialogTitle>
+      <DialogContent className={classes.content}>
         <Email
           handleUpdate={handleUpdate}
-          memberEditing={memberEditing}
+          memberEditing={member}
+          action={VIEW}
         />
         <Phones
           handleUpdate={handleUpdate}
-          phones={memberEditing.phone}
+          phones={member.phone}
+          action={VIEW}
         />
         <Roles
           handleUpdate={handleUpdate}
-          roles={memberEditing.roles}
+          roles={member.roles}
+          action={VIEW}
         />
         <Comments
           handleUpdate={handleUpdate}
-          memberEditing={memberEditing}
+          memberEditing={member}
+          action={VIEW}
         />
 
       </DialogContent>
@@ -75,13 +76,7 @@ const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSav
         <Button
           color='primary'
           onClick={() => handleCloseClick()}>
-          Cancel
-        </Button>
-        <Button
-          color='primary'
-          disabled={!dirty}
-          onClick={(e, memberEditing) => handleSaveClick(e, memberEditing)}>
-          Save
+          Close
         </Button>
       </DialogActions>
     </Dialog>

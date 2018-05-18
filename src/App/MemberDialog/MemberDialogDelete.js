@@ -44,7 +44,7 @@ const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSav
   return (
     <Dialog open={open}>
       <DialogTitle className={classes.title} id='dt-edit-member'>
-        Edit Member
+        Delete Member
         <Caption>ID: {openMemberId}</Caption>
       </DialogTitle>
       <DialogContent className={classes.content}>

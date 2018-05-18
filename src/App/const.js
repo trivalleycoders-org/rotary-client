@@ -1,1 +1,5 @@
 export const MEMBER_DIALOG = 'MemberDialog'
+export const VIEW = 'view'
+export const EDIT = 'edit'
+export const ADD = 'add'
+export const DELETE = 'delete'

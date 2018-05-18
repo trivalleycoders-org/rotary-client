@@ -3,11 +3,11 @@ import React from 'react'
 // import { tvcGreen } from '../../colors'
 // import HorizontalLine from 'elements/HorizontalLine'
 import { Typography } from '@material-ui/core'
+import { green } from 'logger'
 
-
-const Body1 = ({ children }) => {
+const Body1 = ({ children, noGutter }) => {
   return (
-    <Typography variant='body1' gutterBottom>
+    <Typography variant='body1' gutterBottom={!noGutter}>
       {children}
     </Typography>
   )

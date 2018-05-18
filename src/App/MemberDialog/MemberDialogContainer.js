@@ -9,7 +9,8 @@ import MemberDialogEdit from './MemberDialogEdit'
 import MemberDialogAdd from './MemberDialogAdd'
 import MemberDialogDelete from './MemberDialogDelete'
 import { green } from 'logger'
-import { MEMBER_DIALOG } from 'App/const'
+import { MEMBER_DIALOG, VIEW } from 'App/const'
+
 
 class MemberDialogContainer extends Component {
   state = {
@@ -57,9 +58,9 @@ class MemberDialogContainer extends Component {
     const { action, member, memberEditing, open, openMemberId } = this.props
     if (isEmpty(memberEditing)) { return null}
     const form = () => {
-      if (action === 'view') {
+      if (action === VIEW) {
         return <MemberDialogView
-          handleClose={this.handleCloseClick}
+          handleCloseClick={this.handleCloseClick}
           member={member}
           open={open}
           openMemberId={openMemberId}

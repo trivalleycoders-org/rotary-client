@@ -14,10 +14,11 @@ const styles = theme => ({
   }),
 })
 
-const Roles = ({ classes, handleUpdate, roles}) => {
+const Roles = ({ action, classes, handleUpdate, roles}) => {
   const renderRoles = roles.map(r => {
     return (
       <Role
+        action={action}
         key={r._id}
         _id={r._id}
         handleUpdate={handleUpdate}

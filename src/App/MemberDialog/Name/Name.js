@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Avatar from 'elements/Avatar'
 import Caption from 'elements/Caption'
 import { VIEW } from 'App/const'
+import Title from 'elements/Title'
 import { green } from 'logger'
 
 const styles = theme => ({
@@ -41,7 +42,8 @@ const Name = ({ action, classes, handleUpdate, memberEditing }) => {
             >
               {firstName[0]}{lastName[0]}
           </Avatar>
-          {firstName} {lastName}
+          <Title noGutter>{firstName} {lastName}</Title>
+
         </div>
       )
     } else {

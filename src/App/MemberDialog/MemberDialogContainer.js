@@ -5,11 +5,10 @@ import * as memberSelectors from 'store/member-selectors'
 import { isEmpty } from 'ramda'
 import { compose } from 'recompose'
 import MemberDialogView from './MemberDialogView'
-import MemberDialogEdit from './MemberDialogEdit'
-import MemberDialogAdd from './MemberDialogAdd'
+import MemberDialogCreateEdit from './MemberDialogCreateEdit'
 import MemberDialogDelete from './MemberDialogDelete'
 import { green } from 'logger'
-import { MEMBER_DIALOG, VIEW } from 'App/const'
+import { MEMBER_DIALOG, VIEW, EDIT, CREATE, DELETE } from 'App/const'
 
 
 class MemberDialogContainer extends Component {
@@ -17,11 +16,30 @@ class MemberDialogContainer extends Component {
     dirty: false
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    green('componentDidUpdate')
-    // green('this.props.open', this.props.open)
-    // green('memberEditing', this.props.memberEditing)
-    if (this.props.open && isEmpty(this.props.memberEditing)) {
-      this.props.setMemberEditing(this.props.member)
+
+    const { action, member, memberEditing, open, setMemberEditing } = this.props
+
+    // green('componentDidUpdate')
+    // green('this.props.action', action)
+    // green('member', member)
+
+    if (open && isEmpty(memberEditing)) {
+      if (action === VIEW || action === EDIT) {
+          setMemberEditing(member)
+      }
+      if (action === CREATE) {
+        const newMember = {
+          exempt: false,
+          roles: [],
+          phone: [],
+          firstName: '',
+          lastName: '',
+          comments: '',
+          email: '',
+        }
+        setMemberEditing(newMember)
+      }
+      // green('memberEditing', memberEditing)
     }
   }
 
@@ -46,7 +64,6 @@ class MemberDialogContainer extends Component {
     this.props.handleClose(MEMBER_DIALOG)
   }
   handleSaveClick = (e, memberEditing) => {
-
     // green('handleSaveClick: this.props.memberEditing', this.props.memberEditing)
     this.props.requestUpdateOneMember(this.props.memberEditing)
     this.props.unsetOpenMemberId()
@@ -65,9 +82,8 @@ class MemberDialogContainer extends Component {
           open={open}
           openMemberId={openMemberId}
         />
-      }
-      if (action === 'edit') {
-        return <MemberDialogEdit
+      } else if (action === EDIT || action === CREATE) {
+        return <MemberDialogCreateEdit
           dirty={this.state.dirty}
           handleCloseClick={this.handleCloseClick}
           handleSaveClick={this.handleSaveClick}
@@ -77,20 +93,7 @@ class MemberDialogContainer extends Component {
           open={open}
           openMemberId={openMemberId}
         />
-      }
-      if (action === 'add') {
-        return <MemberDialogAdd
-          dirty={this.state.dirty}
-          handleCloseClick={this.handleCloseClick}
-          handleSaveClick={this.handleSaveClick}
-          handleUpdate={this.handleUpdate}
-          member={member}
-          memberEditing={memberEditing}
-          open={open}
-          openMemberId={openMemberId}
-        />
-      }
-      if (action === 'delete') {
+      } else if (action === DELETE) {
         return <MemberDialogDelete
           handleClose={this.handleCloseClick}
           open={open}

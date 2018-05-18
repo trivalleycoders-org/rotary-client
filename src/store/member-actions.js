@@ -74,6 +74,7 @@ export const unsetOpenMemberId = () => {
 
 export const setMemberEditing = (member) => {
   // orange('setMemberEditing: member', member)
+  
   return ({
     type: keySetMemberEditing,
     payload: {

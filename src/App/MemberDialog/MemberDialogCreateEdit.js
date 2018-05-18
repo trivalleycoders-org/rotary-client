@@ -39,12 +39,12 @@ const styles = theme => ({
   },
 })
 
-const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSaveClick, handleUpdate, member, memberEditing, open, openMemberId }) => {
+const MemberDialogCreateEdit = ({ classes, dirty, handleClose, handleCloseClick, handleSaveClick, handleUpdate, member, memberEditing, open, openMemberId }) => {
 
   return (
     <Dialog open={open}>
       <DialogTitle className={classes.title} id='dt-edit-member'>
-        Add Member
+        Create Member
         <Caption>ID: {openMemberId}</Caption>
       </DialogTitle>
       <DialogContent className={classes.content}>
@@ -60,9 +60,9 @@ const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSav
           action={CREATE}
         />
         <Phones
+          action={CREATE}
           handleUpdate={handleUpdate}
           phones={memberEditing.phone}
-          action={CREATE}
         />
         <Roles
           handleUpdate={handleUpdate}
@@ -94,4 +94,4 @@ const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSav
 
 }
 
-export default withStyles(styles)(MemberDialog)
+export default withStyles(styles)(MemberDialogCreateEdit)

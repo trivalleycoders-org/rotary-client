@@ -1,12 +1,14 @@
 import React, {Fragment} from 'react'
-import { TextField } from '@material-ui/core'
 import { red } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from 'elements/Avatar'
 import Caption from 'elements/Caption'
-import { VIEW } from 'App/const'
+import { VIEW, EDIT, CREATE } from 'App/const'
 import Title from 'elements/Title'
-import { green } from 'logger'
+import NameView from './NameView'
+import NameCreate from './NameCreate'
+import NameEdit from './NameEdit'
+import { green, red as redl } from 'logger'
 
 const styles = theme => ({
   avatar: {
@@ -29,56 +31,36 @@ const styles = theme => ({
 })
 
 const Name = ({ action, classes, handleUpdate, memberEditing }) => {
-  // green('Name: handleUpdate', handleUpdate)
   const { firstName, lastName } = memberEditing
-
-    green('first', firstName[0])
-
-    if (action = VIEW) {
-      return (
-        <div className={classes.title}>
-          <Avatar
-            className={classes.avatar}
-            >
-              {firstName[0]}{lastName[0]}
-          </Avatar>
-          <Title noGutter>{firstName} {lastName}</Title>
-
-        </div>
-      )
-    } else {
-      return (
-        <div className={classes.wrapper}>
-          <Avatar className={classes.avatar}>HI</Avatar>
-          <TextField
-            className={classes.textField}
-            label='First Name'
-            name='firstName'
-            onChange={
-              action !== VIEW
-                ? (e) => handleUpdate(e)
-                : null
-              }
-            type='text'
-            value={firstName}
-          />
-          <TextField
-            className={classes.textField}
-            label='Last  Name'
-            name='lastName'
-            onChange={
-              action !== VIEW
-                ? (e) => handleUpdate(e, '')
-                : null
-            }
-            type='text'
-            value={lastName}
-          />
-        </div>
-      )
-    }
-
-
+  if (action === VIEW) {
+    return (
+      <NameView
+        classes={classes}
+        firstName={firstName}
+        lastName={lastName}
+      />
+    )
+  } else if (action === EDIT) {
+    return (
+      <NameEdit
+        classes={classes}
+        firstName={firstName}
+        handleUpdate={handleUpdate}
+        lastName={lastName}
+      />
+    )
+  } else if (action === CREATE) {
+    return (
+      <NameCreate
+        classes={classes}
+        firstName={firstName}
+        handleUpdate={handleUpdate}
+        lastName={lastName}
+      />
+    )
+  } else {
+    redl('ERROR Name.js', `Unknown action name '${action}'`)
+  }
 }
 
 export default withStyles(styles)(Name)

@@ -42,7 +42,6 @@ class RoleSwitch extends Component {
   render() {
     const { _id, action, avoid, classes, hanedleUpdate, name } = this.props
     // blue('ExemptSwitch: switchName', switchName)
-    blue('action', action)
     return (
       <FormControlLabel
         label={name}

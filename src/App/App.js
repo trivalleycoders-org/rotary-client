@@ -5,7 +5,9 @@ import * as requestSelectors from 'store/request-selectors'
 import MembersTable from './MembersTable'
 import MemberDialog from './MemberDialog'
 import AppBar from 'elements/AppBar'
+import { CREATE } from 'App/const'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import Box from './Box'
 
 import { green } from 'logger'
 
@@ -20,7 +22,10 @@ class App extends Component {
   }
 
   handleMemberRowClick = ({ e, _id, formName, action }) => {
-    this.props.setOpenMemberId(_id)
+    // green(`handleMemberRowClick: ${_id}, ${formName}, ${action}`)
+    if (action !== CREATE) {
+      this.props.setOpenMemberId(_id)
+    }
     this.setState({
       [formName]: true,
       action: action,
@@ -43,7 +48,9 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
+          <Box />
           <AppBar title='Rotary Club' />
+
           <MembersTable handleMemberRowClick={this.handleMemberRowClick} />
           <Route
             exact

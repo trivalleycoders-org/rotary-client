@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Paper from '@material-ui/core/Paper'
 import Member from './Member'
+import { CREATE, MEMBER_DIALOG } from 'App/const'
 import { green } from 'logger'
 
 const styles = theme => ({
@@ -69,7 +70,7 @@ const MembersTable = ({ classes, handleMemberRowClick, members }) => {
         color="primary"
         aria-label="add"
         className={classes.button}
-        onClick={e => memberRowClick({ e: e, formName: 'MemberDialog', action: 'add' })}
+        onClick={e => handleMemberRowClick({ e: e, formName: MEMBER_DIALOG, action: CREATE })}
       >
         <AddIcon />
       </Button>

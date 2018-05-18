@@ -5,9 +5,9 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 
 
-const Caption = ({ children }) => {
+const Caption = ({ children, noGutter }) => {
   return (
-    <Typography variant='caption' gutterBottom>
+    <Typography variant='caption' gutterBottom={!noGutter}>
       {children}
     </Typography>
   )

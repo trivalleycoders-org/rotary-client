@@ -8,7 +8,7 @@ import Roles from './Roles'
 import Name from './Name'
 import Caption from 'elements/Caption'
 import { Icon } from '@material-ui/core'
-
+import { CREATE } from 'App/const'
 import Email from './Email'
 import Comments from './Comments'
 import { red, grey } from '@material-ui/core/colors'
@@ -51,23 +51,28 @@ const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSav
         <Name
           handleUpdate={handleUpdate}
           memberEditing={memberEditing}
+          action={CREATE}
         />
 
         <Email
           handleUpdate={handleUpdate}
           memberEditing={memberEditing}
+          action={CREATE}
         />
         <Phones
           handleUpdate={handleUpdate}
           phones={memberEditing.phone}
+          action={CREATE}
         />
         <Roles
           handleUpdate={handleUpdate}
           roles={memberEditing.roles}
+          action={CREATE}
         />
         <Comments
           handleUpdate={handleUpdate}
           memberEditing={memberEditing}
+          action={CREATE}
         />
 
       </DialogContent>

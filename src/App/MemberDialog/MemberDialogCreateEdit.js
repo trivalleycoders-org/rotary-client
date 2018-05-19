@@ -47,7 +47,7 @@ const MemberDialogCreateEdit = ({ classes, dirty, handleClose, handleCloseClick,
         Create Member
         <Caption>ID: {openMemberId}</Caption>
       </DialogTitle>
-      <DialogContent className={classes.content}>
+      <DialogContent id='dc1' className={classes.content}>
         <Name
           handleUpdate={handleUpdate}
           memberEditing={memberEditing}

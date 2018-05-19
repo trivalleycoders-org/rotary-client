@@ -2,26 +2,40 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PhoneCreateEdit from './PhoneCreateEdit'
 import PhoneView from './PhoneView'
-
+import { blue } from '@material-ui/core/colors'
 import { CREATE, EDIT, VIEW } from 'App/const'
 import { green, red } from 'logger'
 
 const styles = theme => ({
+  addButton: {
+    color: blue,
+    marginTop: theme.spacing.unit,
+  },
+  bull: {
+    fontSize: '0.7em',
+    color: 'white',
+  },
+  createEditWrapper: {
+    display: 'flex',
+    flexflow: 'row nowrap',
+  },
+  formControl: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    minWidth: 120
+  },
   icon: {
     color: 'white',
     // margin: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
   },
   textField: {
     // marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 2,
     width: 200,
-  },
-  bull: {
-    fontSize: '0.7em',
-    color: 'white',
   },
   viewPhoneType: {
     color: 'rgb(200, 200, 200)'

@@ -7,10 +7,8 @@ import MemberDialog from './MemberDialog'
 import AppBar from 'elements/AppBar'
 import { CREATE } from 'App/const'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import Box from './Box'
 
 import { green } from 'logger'
-
 
 class App extends Component {
   state = {
@@ -48,7 +46,6 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <Box />
           <AppBar title='Rotary Club' />
 
           <MembersTable handleMemberRowClick={this.handleMemberRowClick} />

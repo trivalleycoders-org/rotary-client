@@ -1,38 +1,17 @@
 import React, { Component } from 'react'
 import { TextField } from '@material-ui/core'
-import PhoneIcon from       '@material-ui/icons/Phone'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-
-
-import { withStyles } from "@material-ui/core/styles";
-import Input from '@material-ui/core/Input'
-import FormHelperText from '@material-ui/core/FormHelperText'
-
-
+import PhoneIcon from '@material-ui/icons/Phone'
+import AddIcon from '@material-ui/icons/Add'
+import ClearIcon from '@material-ui/icons/Clear'
+import Select from 'elements/Select'
 import { green } from 'logger'
 
-const styles = theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2
-  }
-})
+
+import IconButton from '@material-ui/core/IconButton'
+
 
 class PhoneCreateEdit extends Component {
-  state = {
-    age: '',
-    name: 'hai',
-  }
+
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
@@ -41,41 +20,8 @@ class PhoneCreateEdit extends Component {
   render() {
     const { classes, _id, handleUpdate, phoneNumber, phoneType } = this.props
     return (
-      <div key={_id}>
+      <div id='f1' className={classes.createEditWrapper} key={_id}>
         <PhoneIcon className={classes.icon}>phone</PhoneIcon>
-        <TextField
-          className={classes.textField}
-          label='Phone'
-          name='phone|phoneType'
-          onChange={(e) => handleUpdate(e, _id)}
-          type='text'
-          value={phoneType}
-        />
-
-
-        <div autoComplete="off">
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="age-simple">Age</InputLabel>
-            <Select
-              //value={this.state.age}
-              value={this.state.age}
-              onChange={this.handleChange}
-              inputProps={{
-                name: 'age',
-                id: 'age-simple',
-              }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-
-
         <TextField
           label='Phone'
           name='phone|phoneNumber'
@@ -83,11 +29,32 @@ class PhoneCreateEdit extends Component {
           type='text'
           value={phoneNumber}
         />
+        <Select
+          handleChange={handleUpdate}
+          label='Phone Type'
+          menuItems={['Home', 'Work', 'Mobile']}
+          controlName='phone|phoneType'
+        />
+
+        <IconButton color='primary' className={classes.addButton}>
+          <AddIcon />
+        </IconButton>
+
+        <IconButton color='secondary' className={classes.addButton}>
+          <ClearIcon />
+        </IconButton>
       </div>
     )
   }
-
-
 }
 
-export default withStyles(styles)(PhoneCreateEdit)
+export default PhoneCreateEdit
+
+{/* <TextField
+  className={classes.textField}
+  label='Phone'
+  name='phone|phoneType'
+  onChange={(e) => handleUpdate(e, _id)}
+  type='text'
+  value={phoneType}
+/> */}

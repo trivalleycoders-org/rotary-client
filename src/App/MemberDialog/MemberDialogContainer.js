@@ -19,10 +19,6 @@ class MemberDialogContainer extends Component {
 
     const { action, member, memberEditing, open, setMemberEditing } = this.props
 
-    // green('componentDidUpdate')
-    // green('this.props.action', action)
-    // green('member', member)
-
     if (open && isEmpty(memberEditing)) {
       if (action === VIEW || action === EDIT) {
           setMemberEditing(member)
@@ -78,7 +74,6 @@ class MemberDialogContainer extends Component {
     if (isEmpty(memberEditing)) { return null}
     const form = () => {
       if (action === VIEW) {
-        green('action', action)
         return <MemberDialogView
           action={action}
           handleCloseClick={this.handleCloseClick}
@@ -87,7 +82,6 @@ class MemberDialogContainer extends Component {
           openMemberId={openMemberId}
         />
       } else if (action === EDIT || action === CREATE) {
-        green('action', action)
         return <MemberDialogCreateEdit
           action={action}
           addPhone={this.addPhone}
@@ -101,7 +95,6 @@ class MemberDialogContainer extends Component {
           openMemberId={openMemberId}
         />
       } else if (action === DELETE) {
-        green('action', action)
         return <MemberDialogDelete
           action={action}
           handleClose={this.handleCloseClick}

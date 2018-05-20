@@ -54,47 +54,24 @@ const styles = theme => ({
 class PhonesContainer extends Component {
 
   componentDidMount() {
-    green('PhonesContainer.componentDidMount(): props', this.props)
     let phones = this.props.phones
     if (phones.length === 0) {
-      green('phones is zero')
-      // phones.push({ _id: shortid.generate(), phoneType: 'mobile', phoneNumber: '' })
       this.props.addPhone()
     }
-    // const { phones } = this.props
-    // // green('props', this.props)
-    // green('length', phones.length)
-    // if (phones.length === 0 ) {
-    //   phones.push({ phoneType: 'mobile', phoneNumber: ''})
-    // }
-    this.setState({
-      phones: phones,
-    })
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    green('PhonesContainer.componentDidUpdate(): props', this.props)
-  }
-  // addClick = () => {
-  //   green('addClick')
-  //   const oldPhones = [...this.state.phones]
-  //   const newPhones = append({ _id: shortid.generate(), phoneType: 'mobile', phoneNumber: '' }, oldPhones)
-  //   green('newPhones', newPhones)
-  //   this.setState({
-  //     phones: newPhones,
-  //   })
-  // }
 
   renderPhones = () => {
+
     const { action, addPhone, classes, handleUpdate, phones } = this.props
+
     return phones.map(p => {
-      green('p', p)
       if (action === CREATE || action === EDIT) {
         return (
           <PhoneCreateEdit
             _id={p._id}
             action={action}
-            addPhone={this.addPhone}
-            classes={this.props.classes}
+            addPhone={addPhone}
+            classes={classes}
             key={p._id}
             handleUpdate={handleUpdate}
             phoneNumber={p.phoneNumber}
@@ -117,7 +94,6 @@ class PhonesContainer extends Component {
 
   render() {
     const { action, classes, handleUpdate, phones } = this.props
-    green('PhonesContainer.render()')
     return (
       <div>
         {this.renderPhones()}

@@ -94,12 +94,14 @@ export const memberEditing = (state = {}, { type, payload }) => {
     case keyMemberEditingAddPhone:
       const phones = append(payload.phone, state.phones)
       const newState = merge(state, {phones: phones})
-      blue('newState', newState)
+      // blue('newState', newState)
       return newState
     case keyUpdateMemberEditing:
+      debugger
       const fields = payload.field.split('|')
       const field = fields[0]
       const subField = fields.length === 2 ? fields[1] : null
+      blue(`${field}>${subField}`)
       const _id = payload._id
       if (field === 'roles') {
         const newState = clone(state)

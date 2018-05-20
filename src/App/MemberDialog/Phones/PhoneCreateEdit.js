@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core'
 import PhoneIcon from '@material-ui/icons/Phone'
 import AddIcon from '@material-ui/icons/Add'
 import ClearIcon from '@material-ui/icons/Clear'
-import Select from 'elements/Select'
+import Select from './PhoneTypeSelect'
 import { green } from 'logger'
 
 
@@ -30,16 +30,14 @@ class PhoneCreateEdit extends Component {
           value={phoneNumber}
         />
         <Select
-          handleChange={handleUpdate}
-          label='Phone Type'
-          menuItems={['Home', 'Work', 'Mobile']}
-          controlName='phone|phoneType'
+          handleUpdate={e => handleUpdate(e, _id)}
+          phoneType={phoneType}
         />
 
         <IconButton
           color='primary'
           className={classes.addButton}
-          onClick={addPhone}
+          onClick={() => addPhone()}
           >
           <AddIcon />
         </IconButton>

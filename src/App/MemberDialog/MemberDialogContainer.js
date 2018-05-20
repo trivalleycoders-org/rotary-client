@@ -31,7 +31,7 @@ class MemberDialogContainer extends Component {
         const newMember = {
           exempt: false,
           roles: [],
-          phone: [],
+          phones: [],
           firstName: '',
           lastName: '',
           comments: '',
@@ -39,7 +39,6 @@ class MemberDialogContainer extends Component {
         }
         setMemberEditing(newMember)
       }
-      // green('memberEditing', memberEditing)
     }
   }
 
@@ -58,17 +57,20 @@ class MemberDialogContainer extends Component {
       dirty: true,
     })
   }
-  handleCloseClick = () => {
+  handleClose = () => {
     this.props.unsetOpenMemberId()
     this.props.unsetMemberEditing()
     this.props.handleClose(MEMBER_DIALOG)
   }
-  handleSaveClick = (e, memberEditing) => {
+  handleSave = (e, memberEditing) => {
     // green('handleSaveClick: this.props.memberEditing', this.props.memberEditing)
     this.props.requestUpdateOneMember(this.props.memberEditing)
     this.props.unsetOpenMemberId()
     this.props.unsetMemberEditing()
     this.props.handleClose(MEMBER_DIALOG)
+  }
+  addPhone = () => {
+    this.props.memberEditingAddPhone()
   }
 
   render() {
@@ -76,17 +78,22 @@ class MemberDialogContainer extends Component {
     if (isEmpty(memberEditing)) { return null}
     const form = () => {
       if (action === VIEW) {
+        green('action', action)
         return <MemberDialogView
+          action={action}
           handleCloseClick={this.handleCloseClick}
           member={member}
           open={open}
           openMemberId={openMemberId}
         />
       } else if (action === EDIT || action === CREATE) {
+        green('action', action)
         return <MemberDialogCreateEdit
+          action={action}
+          addPhone={this.addPhone}
           dirty={this.state.dirty}
-          handleCloseClick={this.handleCloseClick}
-          handleSaveClick={this.handleSaveClick}
+          handleClose={this.handleClose}
+          handleSave={this.handleSave}
           handleUpdate={this.handleUpdate}
           member={member}
           memberEditing={memberEditing}
@@ -94,7 +101,9 @@ class MemberDialogContainer extends Component {
           openMemberId={openMemberId}
         />
       } else if (action === DELETE) {
+        green('action', action)
         return <MemberDialogDelete
+          action={action}
           handleClose={this.handleCloseClick}
           open={open}
         />

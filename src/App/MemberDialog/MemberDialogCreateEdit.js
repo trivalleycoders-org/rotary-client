@@ -39,8 +39,7 @@ const styles = theme => ({
   },
 })
 
-const MemberDialogCreateEdit = ({ classes, dirty, handleClose, handleCloseClick, handleSaveClick, handleUpdate, member, memberEditing, open, openMemberId }) => {
-
+const MemberDialogCreateEdit = ({ action, addPhone, classes, dirty, handleClose, handleSave, handleUpdate, memberEditing, open, openMemberId }) => {
   return (
     <Dialog open={open}>
       <DialogTitle className={classes.title} id='dt-edit-member'>
@@ -49,43 +48,44 @@ const MemberDialogCreateEdit = ({ classes, dirty, handleClose, handleCloseClick,
       </DialogTitle>
       <DialogContent id='dc1' className={classes.content}>
         <Name
+          action={action}
           handleUpdate={handleUpdate}
           memberEditing={memberEditing}
-          action={CREATE}
         />
 
         <Email
+          action={action}
           handleUpdate={handleUpdate}
           memberEditing={memberEditing}
-          action={CREATE}
         />
         <Phones
-          action={CREATE}
+          action={action}
+          addPhone={addPhone}
           handleUpdate={handleUpdate}
-          phones={memberEditing.phone}
+          phones={memberEditing.phones}
         />
         <Roles
+          action={action}
           handleUpdate={handleUpdate}
           roles={memberEditing.roles}
-          action={CREATE}
         />
         <Comments
+          action={action}
           handleUpdate={handleUpdate}
           memberEditing={memberEditing}
-          action={CREATE}
         />
 
       </DialogContent>
       <DialogActions>
         <Button
           color='primary'
-          onClick={() => handleCloseClick()}>
+          onClick={() => handleClose()}>
           Cancel
         </Button>
         <Button
           color='primary'
           disabled={!dirty}
-          onClick={(e, memberEditing) => handleSaveClick(e, memberEditing)}>
+          onClick={(e, memberEditing) => handleSave(e, memberEditing)}>
           Save
         </Button>
       </DialogActions>

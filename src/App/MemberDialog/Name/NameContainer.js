@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Component, Fragment} from 'react'
 import { red } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from 'elements/Avatar'
@@ -6,8 +6,7 @@ import Caption from 'elements/Caption'
 import { VIEW, EDIT, CREATE } from 'App/const'
 import Title from 'elements/Title'
 import NameView from './NameView'
-import NameCreate from './NameCreate'
-import NameEdit from './NameEdit'
+import NameCreateEdit from './NameCreateEdit'
 import { green, red as redl } from 'logger'
 
 const styles = theme => ({
@@ -40,18 +39,9 @@ const Name = ({ action, classes, handleUpdate, memberEditing }) => {
         lastName={lastName}
       />
     )
-  } else if (action === EDIT) {
+  } else if (action === CREATE || action === EDIT) {
     return (
-      <NameEdit
-        classes={classes}
-        firstName={firstName}
-        handleUpdate={handleUpdate}
-        lastName={lastName}
-      />
-    )
-  } else if (action === CREATE) {
-    return (
-      <NameCreate
+      <NameCreateEdit
         classes={classes}
         firstName={firstName}
         handleUpdate={handleUpdate}

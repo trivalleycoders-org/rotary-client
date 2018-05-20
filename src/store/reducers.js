@@ -1,9 +1,16 @@
 import { combineReducers } from 'redux'
-import { merge, clone, remove, insert } from 'ramda'
+import {
+  append,
+  clone,
+  insert ,
+  merge,
+  remove,
+} from 'ramda'
 import {
   /*keyMemberEditing,*/
   keyReplaceAllMembers,
   updateOneMember,
+  keyMemberEditingAddPhone,
   keySetMemberDialogAction,
   keySetOpenMemberId,
   keySetMemberEditing,
@@ -79,25 +86,21 @@ export const roles = ( state = [], { type, payload }) => {
 }
 
 export const memberEditing = (state = {}, { type, payload }) => {
-
   switch (type) {
     case keySetMemberEditing:
       return payload.member
     case keyUnsetMemberEditing:
       return {} // { firstName: '' }
+    case keyMemberEditingAddPhone:
+      const phones = append(payload.phone, state.phones)
+      const newState = merge(state, {phones: phones})
+      blue('newState', newState)
+      return newState
     case keyUpdateMemberEditing:
-      // field are sometimes sent in as '|' delimited strings
-      // e.g., 'roles|photographer'
-      // blue('memberEditing: state', state)
-      // blue('memberEditing: payload', payload)
       const fields = payload.field.split('|')
-      // for now, there will only be field & subField, no
-      // further levels
       const field = fields[0]
       const subField = fields.length === 2 ? fields[1] : null
       const _id = payload._id
-      // blue('field', field)
-      // blue('subField', subField)
       if (field === 'roles') {
         const newState = clone(state)
         newState.roles = state.roles.map(p => {
@@ -109,7 +112,7 @@ export const memberEditing = (state = {}, { type, payload }) => {
         return newState
       } else if (field === 'phone') {
         const newState = clone(state)
-        newState.phone = state.phone.map(p => {
+        newState.phones = state.phones.map(p => {
           if (p._id === _id) {
             return merge(p, {[subField]: payload.value})
           }

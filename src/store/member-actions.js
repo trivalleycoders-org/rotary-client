@@ -1,12 +1,14 @@
 import { createRequestThunk } from './action-helpers'
 // import { logReturnValue } from './action-helpers'
 import api from 'api'
+import shortid from 'shortid'
 import { orange } from 'logger'
 
 export const keyReplaceAllMembers = 'actionKeyReplaceAllMembers'
 export const keyUpdateOneMember = 'actionUpdateOneMembers'
 
 export const keyMemberEditing = 'actionKeyMemberEditing'
+export const keyMemberEditingAddPhone = 'actionKeyMemberEditingAddPhone'
 export const keySetMemberDialogAction = 'actionKeySetMemberDialogAction'
 export const keySetMemberEditing = 'actionKeySetMemberEditing'
 export const keyUnsetMemberDialogAction = 'actionKeyUnsetMemberDialogAction'
@@ -18,6 +20,16 @@ export const keyUnsetOpenMemberId = 'actionKeyUnsetOpenMemberId'
 
 export const requestKeyReadAllMembers = 'requestKeyReadAllMembers'
 export const requestKeyUpdateOneMember = 'requestKeyUpdateOneMember'
+
+
+export const memberEditingAddPhone = () => {
+  return (
+    {
+      type: keyMemberEditingAddPhone,
+      payload: { phone: { _id: shortid.generate(), phoneType: 'mobile', phoneNumber: '' }}
+    }
+  )
+}
 
 export const updateOneMember = (member) => {
   // orange('updateOneMember: member', member)
@@ -74,7 +86,7 @@ export const unsetOpenMemberId = () => {
 
 export const setMemberEditing = (member) => {
   // orange('setMemberEditing: member', member)
-  
+
   return ({
     type: keySetMemberEditing,
     payload: {

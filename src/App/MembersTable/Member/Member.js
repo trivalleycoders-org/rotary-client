@@ -21,11 +21,11 @@ class Member extends Component {
       exempt,
       lastName,
       handleMemberRowClick,
-      phone,
+      phones,
       /*roles,*/
      } = this.props
 
-    const renderPhone = phone.map((p) => {
+    const renderPhone = phones.map((p) => {
       return (<div key={shortid.generate()}>{`${p.phoneType}: ${p.phoneNumber}`}</div>)
     })
 

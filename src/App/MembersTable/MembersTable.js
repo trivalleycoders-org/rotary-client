@@ -41,7 +41,7 @@ const MembersTable = ({ classes, handleMemberRowClick, members }) => {
         comments={m.comments}
         exempt={m.exempt}
         // roles={m.roles}
-        phone={m.phone}
+        phones={m.phones}
         email={m.email}
         handleMemberRowClick={handleMemberRowClick}
       />

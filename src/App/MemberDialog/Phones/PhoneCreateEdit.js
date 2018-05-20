@@ -18,7 +18,7 @@ class PhoneCreateEdit extends Component {
   }
 
   render() {
-    const { classes, _id, handleUpdate, phoneNumber, phoneType } = this.props
+    const { addClick, addPhone, classes, _id, handleUpdate, phoneNumber, phoneType } = this.props
     return (
       <div id='f1' className={classes.createEditWrapper} key={_id}>
         <PhoneIcon className={classes.icon}>phone</PhoneIcon>
@@ -36,7 +36,11 @@ class PhoneCreateEdit extends Component {
           controlName='phone|phoneType'
         />
 
-        <IconButton color='primary' className={classes.addButton}>
+        <IconButton
+          color='primary'
+          className={classes.addButton}
+          onClick={addPhone}
+          >
           <AddIcon />
         </IconButton>
 
@@ -49,12 +53,3 @@ class PhoneCreateEdit extends Component {
 }
 
 export default PhoneCreateEdit
-
-{/* <TextField
-  className={classes.textField}
-  label='Phone'
-  name='phone|phoneType'
-  onChange={(e) => handleUpdate(e, _id)}
-  type='text'
-  value={phoneType}
-/> */}

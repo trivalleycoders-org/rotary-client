@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core'
@@ -8,7 +9,6 @@ import Roles from './Roles'
 import Name from './Name'
 import Caption from 'elements/Caption'
 import { Icon } from '@material-ui/core'
-import { CREATE } from 'App/const'
 import Email from './Email'
 import Comments from './Comments'
 import { red, grey } from '@material-ui/core/colors'
@@ -39,7 +39,26 @@ const styles = theme => ({
   },
 })
 
-const MemberDialogCreateEdit = ({ action, addPhone, classes, dirty, handleClose, handleSave, handleUpdate, memberEditing, open, openMemberId }) => {
+type Params = {
+  action: string,
+  addPhone: () => void,
+  classes: {
+    title: string,
+    content: string,
+  },
+  dirty: boolean,
+  handleClose: () => void,
+  handleSave: ({}, {}) => void,
+  handleUpdate: () => void,
+  memberEditing: {
+    phones: [],
+    roles: [],
+  },
+  open: boolean,
+  openMemberId: string,
+}
+const MemberDialogCreateEdit = ({ action, addPhone, classes, dirty, handleClose, handleSave, handleUpdate, memberEditing, open, openMemberId }: Params) => {
+
   return (
     <Dialog open={open}>
       <DialogTitle className={classes.title} id='dt-edit-member'>

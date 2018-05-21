@@ -1,9 +1,20 @@
+// @flow
 import React from 'react'
-import PhoneIcon from       '@material-ui/icons/Phone'
+import PhoneIcon from '@material-ui/icons/Phone'
 import Body1 from 'elements/Body1'
 import { green } from 'logger'
 
-const PhoneView = ({ classes, phoneNumber, phoneType }) => {
+type Params = {
+  classes: {
+    viewWrapper: string,
+    icon: string,
+    bull: string,
+    viewPhoneType: string,
+  },
+  phoneNumber: string,
+  phoneType: string,
+}
+const PhoneView = ({ classes, phoneNumber, phoneType }: Params) => {
   return (
     <div className={classes.viewWrapper}>
       <p>Phone view</p>

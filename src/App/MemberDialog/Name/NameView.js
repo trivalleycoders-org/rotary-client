@@ -1,9 +1,19 @@
+// @flow
 import React from 'react'
 import { TextField } from '@material-ui/core'
 import Avatar from 'elements/Avatar'
 import Title from 'elements/Title'
 
-const NameView = ({ classes, firstName, lastName}) => {
+type Params = {
+  classes: {
+    title: string,
+    avatar: string,
+  },
+  firstName: string,
+  lastName: string,
+}
+
+const NameView = ({ classes, firstName, lastName}: Params) => {
   return (
     <div className={classes.title}>
       <p>NameView</p>

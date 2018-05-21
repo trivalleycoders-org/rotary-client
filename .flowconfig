@@ -1,0 +1,15 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='^elements\/\(.*\)$' -> '<PROJECT_ROOT>/src/elements/\1'
+module.name_mapper='^store\/\(.*\)$' -> '<PROJECT_ROOT>/src/store/\1'
+module.name_mapper='^App\/\(.*\)$' -> '<PROJECT_ROOT>/src/App/\1'
+module.name_mapper='^logger$' -> '<PROJECT_ROOT>/src/logger'
+
+[strict]

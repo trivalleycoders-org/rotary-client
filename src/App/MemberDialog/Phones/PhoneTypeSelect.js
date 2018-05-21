@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -23,7 +24,15 @@ const styles = theme => ({
 const controlName = 'phone|phoneType'
 const menuItems = ['Home', 'Work', 'Mobile']
 
-class PhoneTypeSelect extends React.Component {
+type Props = {
+  classes: {
+    formControl: string
+  },
+  handleUpdate: () => void,
+  phoneType: string,
+}
+
+class PhoneTypeSelect extends React.Component<Props> {
 
   menuItems = menuItems.map(m => {
     return (

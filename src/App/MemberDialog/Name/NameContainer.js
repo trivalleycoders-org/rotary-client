@@ -1,3 +1,4 @@
+// @flow
 import React, {Component, Fragment} from 'react'
 import { red } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
@@ -29,7 +30,19 @@ const styles = theme => ({
   }
 })
 
-const Name = ({ action, classes, handleUpdate, memberEditing }) => {
+type Params = {
+  action: string,
+  classes: {
+    avatar: string,
+    title: string,
+    textField: string,
+    wrapper: string,
+  },
+  handleUpdate: () => void,
+  memberEditing: {} => void,
+}
+
+const Name = ({ action, classes, handleUpdate, memberEditing }: Params) => {
   const { firstName, lastName } = memberEditing
   if (action === VIEW) {
     return (

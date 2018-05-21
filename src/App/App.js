@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import * as memberActions from 'store/member-actions'
@@ -10,7 +11,19 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import { green } from 'logger'
 
-class App extends Component {
+type Props = {
+  readMembersStatus: string,
+  requestReadAllMembers: () => void,
+  setOpenMemberId: (_id: string) => void,
+  unsetOpenMemberId: () => void,
+}
+
+type State = {
+  MemberDialog: boolean,
+  action: string,
+}
+
+class App extends Component<Props, State> {
   state = {
     MemberDialog: false,
     action: '',

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import * as memberActions from 'store/member-actions'
@@ -10,14 +11,42 @@ import MemberDialogDelete from './MemberDialogDelete'
 import { green } from 'logger'
 import { MEMBER_DIALOG, VIEW, EDIT, CREATE, DELETE } from 'App/const'
 
+type Member = {
+  exempt: boolean,
+  roles: Array<string>,
+  phones: Array<{}>,
+  firstName: string,
+  lastName: string,
+  comments: string,
+  email: string,
+}
 
-class MemberDialogContainer extends Component {
+type Props = {
+  action: string,
+  handleClose: (string) => void,
+  member: {},
+  memberEditing: {},
+  memberEditingAddPhone: () => void,
+  open: boolean,
+  openMemberId: string,
+  requestUpdateOneMember: ({}) => void,
+  setMemberEditing: any,
+  unsetMemberEditing: () => void,
+  updateMemberEditing: (field: string, value: any, _id: string) => void,
+  unsetOpenMemberId: () => void,
+}
+
+type State = {
+  dirty: boolean,
+}
+
+class MemberDialogContainer extends Component<Props, State> {
   state = {
     dirty: false
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    const { action, member, memberEditing, open, setMemberEditing } = this.props
+    const { action, member, memberEditing, open, setMemberEditing, updateMemberEditing } = this.props
 
     if (open && isEmpty(memberEditing)) {
       if (action === VIEW || action === EDIT) {
@@ -76,7 +105,7 @@ class MemberDialogContainer extends Component {
       if (action === VIEW) {
         return <MemberDialogView
           action={action}
-          handleCloseClick={this.handleCloseClick}
+          handleCloseClick={this.handleClose}
           member={member}
           open={open}
           openMemberId={openMemberId}
@@ -97,7 +126,7 @@ class MemberDialogContainer extends Component {
       } else if (action === DELETE) {
         return <MemberDialogDelete
           action={action}
-          handleClose={this.handleCloseClick}
+          handleClose={this.handleClose}
           open={open}
         />
       }

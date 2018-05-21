@@ -1,24 +1,30 @@
+// @flow
 import React, { Component } from 'react'
 import { TextField } from '@material-ui/core'
-import PhoneIcon from '@material-ui/icons/Phone'
 import AddIcon from '@material-ui/icons/Add'
 import ClearIcon from '@material-ui/icons/Clear'
+import IconButton from '@material-ui/core/IconButton'
+import PhoneIcon from '@material-ui/icons/Phone'
 import Select from './PhoneTypeSelect'
 import { green } from 'logger'
 
+type Props = {
+  addPhone: () => void,
+  classes: {
+    createEditWrapper: string,
+    icon: string,
+    addButton: string,
+  },
+  _id: string,
+  handleUpdate: (e: {}, _id: string) => void,
+  phoneNumber: string,
+  phoneType: string,
+}
 
-import IconButton from '@material-ui/core/IconButton'
-
-
-class PhoneCreateEdit extends Component {
-
-
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+class PhoneCreateEdit extends Component<Props> {
 
   render() {
-    const { addClick, addPhone, classes, _id, handleUpdate, phoneNumber, phoneType } = this.props
+    const { addPhone, classes, _id, handleUpdate, phoneNumber, phoneType } = this.props
     return (
       <div id='f1' className={classes.createEditWrapper} key={_id}>
         <PhoneIcon className={classes.icon}>phone</PhoneIcon>

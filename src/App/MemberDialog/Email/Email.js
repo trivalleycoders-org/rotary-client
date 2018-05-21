@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { TextField } from '@material-ui/core'
 import { red } from '@material-ui/core/colors'
@@ -48,7 +49,11 @@ const styles = theme => ({
   }
 })
 
-const Email = ({ action, classes, children, handleUpdate, memberEditing }) => {
+type Params = {
+  action: string,
+}
+
+const Email = ({ action, classes, children, handleUpdate, memberEditing }: Params) => {
   const { email } = memberEditing
   if (action === VIEW) {
     return (

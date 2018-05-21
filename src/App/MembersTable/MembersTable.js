@@ -28,7 +28,6 @@ const styles = theme => ({
 })
 
 const MembersTable = ({ classes, handleMemberRowClick, members }) => {
-
   const rows = members.map(m => {
     // green('MembersTable: m._id', m._id)
     return (

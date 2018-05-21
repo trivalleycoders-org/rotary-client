@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PhoneCreateEdit from './PhoneCreateEdit'
@@ -51,7 +52,26 @@ const styles = theme => ({
   }
 })
 
-class PhonesContainer extends Component {
+type Props = {
+  phones: Array<{
+    _id: string,
+    phoneNumber: string,
+    phoneType: string,
+  }>,
+  addPhone: () => void,
+  action: string,
+  classes: {
+    addButton: string,
+    createEditWrapper: string,
+    icon: string,
+    bull: string,
+    viewPhoneType: string,
+    viewWrapper: string,
+  },
+  handleUpdate: () => void
+}
+
+class PhonesContainer extends Component<Props> {
 
   componentDidMount() {
     let phones = this.props.phones

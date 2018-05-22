@@ -13,6 +13,3 @@ module.name_mapper='^App\/\(.*\)$' -> '<PROJECT_ROOT>/src/App/\1'
 module.name_mapper='^logger$' -> '<PROJECT_ROOT>/src/logger'
 
 [strict]
-
-[version]
-^0.72.0

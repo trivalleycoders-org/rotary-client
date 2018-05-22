@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { TextField } from '@material-ui/core'
 import { red } from '@material-ui/core/colors'
@@ -35,7 +36,24 @@ const styles = theme => ({
   }
 })
 
-const Comments = ({ action, classes, children, handleUpdate, memberEditing }) => {
+type Params = {
+  action: string,
+  classes: {
+    viewWrapper: string,
+    icon: string,
+    textField: string,
+    viewText: string,
+    wrapper: string,
+  },
+  children: {},
+  handleUpdate: ({}, string) => void,
+  memberEditing: {
+    comments: string
+  },
+}
+
+
+const Comments = ({ action, classes, children, handleUpdate, memberEditing }: Params) => {
   const { comments } = memberEditing
   if (action === VIEW) {
     return (
@@ -58,7 +76,7 @@ const Comments = ({ action, classes, children, handleUpdate, memberEditing }) =>
           name='comments'
           onChange={
             action !== VIEW
-              ? (e) => handleUpdate(e)
+              ? (e) => handleUpdate(e, '')
               : null
           }
           // rows="4"

@@ -51,6 +51,12 @@ const styles = theme => ({
 
 type Params = {
   action: string,
+  classes: {},
+  children: {},
+  handleUpdate: ({}, string) => void,
+  memberEditing: {
+    email: string,
+  },
 }
 
 const Email = ({ action, classes, children, handleUpdate, memberEditing }: Params) => {

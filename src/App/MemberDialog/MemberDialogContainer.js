@@ -10,21 +10,12 @@ import MemberDialogCreateEdit from './MemberDialogCreateEdit'
 import MemberDialogDelete from './MemberDialogDelete'
 import { green } from 'logger'
 import { MEMBER_DIALOG, VIEW, EDIT, CREATE, DELETE } from 'App/const'
-
-type Member = {
-  exempt: boolean,
-  roles: Array<string>,
-  phones: Array<{}>,
-  firstName: string,
-  lastName: string,
-  comments: string,
-  email: string,
-}
+import type { Member } from '../types/member-types'
 
 type Props = {
   action: string,
   handleClose: (string) => void,
-  member: {},
+  member: Member,
   memberEditing: {},
   memberEditingAddPhone: () => void,
   open: boolean,
@@ -53,7 +44,7 @@ class MemberDialogContainer extends Component<Props, State> {
           setMemberEditing(member)
       }
       if (action === CREATE) {
-        const newMember = {
+        const newMember: Member = {
           exempt: false,
           roles: [],
           phones: [],
@@ -67,15 +58,16 @@ class MemberDialogContainer extends Component<Props, State> {
     }
   }
 
-  handleUpdate = (e, _id, controlType) => {
+    handleUpdate = (e: SyntheticEvent<HTMLInputElement>, _id: string, controlType: ?string) => {
     // if the item is a sub-document with _id, it will be passed
+    const ct = (e.currentTarget)
 
-    const field = e.target.name
+    const field = ct.name
     let value
     if (controlType === 'switch') {
-      value = e.target.checked
+      value = ct.checked
     } else {
-      value = e.target.value
+      value = ct.value
     }
     this.props.updateMemberEditing(field, value, _id)
     this.setState({

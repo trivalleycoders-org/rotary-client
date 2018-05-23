@@ -46,7 +46,7 @@ type Params = {
     wrapper: string,
   },
   children: {},
-  handleUpdate: ({}, string) => void,
+  handleUpdate: (e: SyntheticEvent<HTMLButtonElement>, _id: ?string, controlType: ?string) => void,
   memberEditing: {
     comments: string
   },
@@ -76,7 +76,7 @@ const Comments = ({ action, classes, children, handleUpdate, memberEditing }: Pa
           name='comments'
           onChange={
             action !== VIEW
-              ? (e) => handleUpdate(e, '')
+              ? (e) => handleUpdate(e)
               : null
           }
           // rows="4"

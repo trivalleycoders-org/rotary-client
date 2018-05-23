@@ -6,6 +6,7 @@ import {
 } from 'store/member-actions'
 
 import { append, clone, merge } from 'ramda'
+import { blue } from 'logger'
 
 
 const updateMemberEditing = (state, payload) => {

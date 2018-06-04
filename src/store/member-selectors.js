@@ -19,3 +19,9 @@ export const getOpenMemberId = (state) => {
 export const getMemberEditing = (state) => {
   return state.uiData.members.memberEditing || null
 }
+
+export const getMemberDialogAction = (state) => {
+  // yellow('getOpenMemberId: state', state)
+  const r = state.uiData.members.memberDialogAction || null
+  return r
+}

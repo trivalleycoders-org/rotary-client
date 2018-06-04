@@ -5,23 +5,58 @@ import * as memberSelectors from 'store/member-selectors'
 import { isEmpty } from 'ramda'
 import { compose } from 'recompose'
 import MemberDialogView from './MemberDialogView'
-import MemberDialogEdit from './MemberDialogEdit'
-import MemberDialogAdd from './MemberDialogAdd'
+import MemberDialogCreateEdit from './MemberDialogCreateEdit'
 import MemberDialogDelete from './MemberDialogDelete'
-import { green } from 'logger'
-import { MEMBER_DIALOG, VIEW } from 'App/const'
+import { green, red } from 'logger'
+import { MEMBER_DIALOG, VIEW, EDIT, CREATE, DELETE } from 'App/const'
+import type { Member } from '../types/member-types'
+import { clone, dissoc } from 'ramda'
 
+const cleanMember = (member) => {
+  // check phones
+  console.log('member', member)
+
+  const phones = member.phones.filter(
+    p => p.phoneType !== '' && p.phoneNumber !== ''
+  )
+
+  const nm1 = phones.length === 0
+    ? dissoc('phones', clone(member))
+    : clone(member)
+  green('roles.length', nm1.roles.length)
+  const nm2 = nm1.roles.length === 0
+    ? dissoc('roles', nm1)
+    : nm1
+
+  green('newMember', nm2)
+  return nm2
+}
 
 class MemberDialogContainer extends Component {
   state = {
-    dirty: false
+    dirty: false,
+    validate: false,
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    green('componentDidUpdate')
-    // green('this.props.open', this.props.open)
-    // green('memberEditing', this.props.memberEditing)
-    if (this.props.open && isEmpty(this.props.memberEditing)) {
-      this.props.setMemberEditing(this.props.member)
+
+  const { action, member, memberEditing, open, setMemberEditing, updateMemberEditing } = this.props
+
+    if (open && isEmpty(memberEditing)) {
+      if (action === VIEW || action === EDIT) {
+          setMemberEditing(member)
+      }
+      if (action === CREATE) {
+        const newMember: Member = {
+          exempt: false,
+          roles: [],
+          phones: [],
+          firstName: '',
+          lastName: '',
+          comments: '',
+          email: '',
+        }
+        setMemberEditing(newMember)
+      }
     }
   }
 
@@ -40,18 +75,37 @@ class MemberDialogContainer extends Component {
       dirty: true,
     })
   }
-  handleCloseClick = () => {
+
+  handleClose = () => {
     this.props.unsetOpenMemberId()
     this.props.unsetMemberEditing()
     this.props.handleClose(MEMBER_DIALOG)
   }
-  handleSaveClick = (e, memberEditing) => {
 
+  handleSave = (e) => {
+
+    const { action } = this.props
+    if (action === EDIT || action === CREATE) {
+      this.setState({
+        validate: true,
+      })
+    }
+    if (action === EDIT) {
+      this.props.requestUpdateOneMember(this.props.memberEditing)
+    } else if (action === CREATE) {
+      green('handleSave: memberEditing; ', this.props.memberEditing)
+      this.props.requestCreateOneMember(cleanMember(this.props.memberEditing))
+      // this.props.requestCreateOneMember(this.props.memberEditing)
+    } else {
+      red('MemberDialogContainer.handleSave: Error: ', `Invalid case ${action}`)
+    }
     // green('handleSaveClick: this.props.memberEditing', this.props.memberEditing)
-    this.props.requestUpdateOneMember(this.props.memberEditing)
     this.props.unsetOpenMemberId()
     this.props.unsetMemberEditing()
     this.props.handleClose(MEMBER_DIALOG)
+  }
+  addPhone = () => {
+    this.props.memberEditingAddPhone()
   }
 
   render() {
@@ -60,39 +114,30 @@ class MemberDialogContainer extends Component {
     const form = () => {
       if (action === VIEW) {
         return <MemberDialogView
-          handleCloseClick={this.handleCloseClick}
+          action={action}
+          handleCloseClick={this.handleClose}
           member={member}
           open={open}
           openMemberId={openMemberId}
         />
-      }
-      if (action === 'edit') {
-        return <MemberDialogEdit
+      } else if (action === EDIT || action === CREATE) {
+        return <MemberDialogCreateEdit
+          action={action}
+          addPhone={this.addPhone}
           dirty={this.state.dirty}
-          handleCloseClick={this.handleCloseClick}
-          handleSaveClick={this.handleSaveClick}
+          handleClose={this.handleClose}
+          handleSave={this.handleSave}
           handleUpdate={this.handleUpdate}
           member={member}
           memberEditing={memberEditing}
           open={open}
           openMemberId={openMemberId}
+          validate={this.state.validate}
         />
-      }
-      if (action === 'add') {
-        return <MemberDialogAdd
-          dirty={this.state.dirty}
-          handleCloseClick={this.handleCloseClick}
-          handleSaveClick={this.handleSaveClick}
-          handleUpdate={this.handleUpdate}
-          member={member}
-          memberEditing={memberEditing}
-          open={open}
-          openMemberId={openMemberId}
-        />
-      }
-      if (action === 'delete') {
+      } else if (action === DELETE) {
         return <MemberDialogDelete
-          handleClose={this.handleCloseClick}
+          action={action}
+          handleClose={this.handleClose}
           open={open}
         />
       }
@@ -115,6 +160,7 @@ const mapStateToProps = (state) => {
     member: memberSelectors.getOneMember(state, id),
     openMemberId: id,
     memberEditing: memberSelectors.getMemberEditing(state),
+    action: memberSelectors.getMemberDialogAction(state)
   }
 }
 

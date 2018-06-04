@@ -3,15 +3,17 @@ import { pink } from 'logger'
 
 export default {
   members: {
-    create() {
-      // log('api.members.create: member', member, 'orange')
+    create(member) {
+      pink('api.members.create: member in', member)
       return fetchJson(
         '/members',
         {
           method: 'POST',
+          body: JSON.stringify(member)
         }
-      ).then((id) => {
-        return id
+      ).then((data) => {
+        pink('api.members.create: data out', data)
+        return data
       })
     },
     read() {
@@ -22,15 +24,15 @@ export default {
       )
     },
     patch(member) {
-      //ku.log('api.members.update: id', id, 'orange')
-      //ku.log('api.members.update: member', member, 'orange')
+      pink('api.members.update: id', id)
+      // pink('api.members.update: member', member)
       pink('api.patch: member', member)
       const _id = member._id
       return fetchJson(
         `/members/${_id}`,
         {
           method: 'PATCH',
-          body: JSON.stringify({ member })
+          body: JSON.stringify(member)
         }
       )
     },

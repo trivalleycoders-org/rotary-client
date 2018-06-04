@@ -73,7 +73,7 @@ const MemberDialogView = ({ classes, dirty, handleClose, handleCloseClick, handl
         />
         <Phones
           handleUpdate={handleUpdate}
-          phones={member.phone}
+          phones={member.phones}
           action={VIEW}
         />
         <Roles

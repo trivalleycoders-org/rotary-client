@@ -1,12 +1,15 @@
 import { createRequestThunk } from './action-helpers'
 // import { logReturnValue } from './action-helpers'
 import api from 'api'
+import shortid from 'shortid'
 import { orange } from 'logger'
 
 export const keyReplaceAllMembers = 'actionKeyReplaceAllMembers'
 export const keyUpdateOneMember = 'actionUpdateOneMembers'
+export const keyCreateOneMember = 'actionCreateOneMembers'
 
 export const keyMemberEditing = 'actionKeyMemberEditing'
+export const keyMemberEditingAddPhone = 'actionKeyMemberEditingAddPhone'
 export const keySetMemberDialogAction = 'actionKeySetMemberDialogAction'
 export const keySetMemberEditing = 'actionKeySetMemberEditing'
 export const keyUnsetMemberDialogAction = 'actionKeyUnsetMemberDialogAction'
@@ -18,22 +21,38 @@ export const keyUnsetOpenMemberId = 'actionKeyUnsetOpenMemberId'
 
 export const requestKeyReadAllMembers = 'requestKeyReadAllMembers'
 export const requestKeyUpdateOneMember = 'requestKeyUpdateOneMember'
+export const requestKeyCreateOneMember = 'requestKeyCreateOneMember'
+
+export const memberEditingAddPhone = () => {
+  return (
+    {
+      type: keyMemberEditingAddPhone,
+      payload: { phone: { _id: shortid.generate(), phoneType: 'mobile', phoneNumber: '' }}
+    }
+  )
+}
 
 export const updateOneMember = (member) => {
   // orange('updateOneMember: member', member)
   return (
     {
-      type: updateOneMember,
+      type: keyUpdateOneMember,
       payload: { member }
     }
   )
 }
 
+export const createOneMember = (member) => {
+  return (
+    {
+      type: keyCreateOneMember,
+      payload: { member }
+    }
+  )
+}
 
 export const setMemberDialogAction = (action) => {
-  // actions: edit, add
-
-  // orange('2) setOpenMemberId', id)
+  orange('setMemberDialogAction', action)
   return (
     {
       type: keySetMemberDialogAction,
@@ -120,16 +139,8 @@ export const requestUpdateOneMember = createRequestThunk({
   success: [ updateOneMember ],
 })
 
-
-///////////////////////////////////////////////////////
-// Not in use
-export const appAddMember = 'actionAppAddMember' // not used
-export const addMember = (member) => {
-  return (
-    {
-    type: appAddMember,
-    payload: {
-      member
-    }
-  })
-}
+export const requestCreateOneMember = createRequestThunk({
+  request: api.members.create,
+  key: requestKeyCreateOneMember,
+  success: [ createOneMember ],
+})

@@ -59,7 +59,7 @@ const MemberDialog = ({ classes, dirty, handleClose, handleCloseClick, handleSav
         />
         <Phones
           handleUpdate={handleUpdate}
-          phones={memberEditing.phone}
+          phones={memberEditing.phones}
         />
         <Roles
           handleUpdate={handleUpdate}
